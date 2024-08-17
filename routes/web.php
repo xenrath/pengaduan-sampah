@@ -32,3 +32,7 @@ Route::middleware('pengguna')->prefix('pengguna')->group(function () {
     Route::resource('pengaduan', \App\Http\Controllers\Pengguna\PengaduanController::class);
     Route::resource('list-pengaduan', \App\Http\Controllers\Pengguna\ListPengaduanController::class);
 });
+
+Route::middleware('petugas')->prefix('petugas')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Petugas\HomeController::class, 'index']);
+});

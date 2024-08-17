@@ -83,6 +83,9 @@
                         @if (auth()->user()->isPengguna())
                             @include('layouts.menu.pengguna')
                         @endif
+                        @if (auth()->user()->isPetugas())
+                            @include('layouts.menu.petugas')
+                        @endif
                         <li class="nav-header">Profile</li>
                         <li class="nav-item">
                             <a href="{{ url('profile') }}"

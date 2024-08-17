@@ -24,6 +24,7 @@ Route::post('profile', [\App\Http\Controllers\AuthController::class, 'profile_pr
 
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
+    Route::resource('petugas', \App\Http\Controllers\Petugas\HomeController::class);
 });
 
 Route::middleware('pengguna')->prefix('pengguna')->group(function () {

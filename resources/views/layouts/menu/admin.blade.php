@@ -9,7 +9,7 @@
 </li>
 <li class="nav-header">Menu</li>
 <li class="nav-item">
-    <a href="{{ url('admin/user') }}" class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}">
+    <a href="{{ url('admin/pengaduan') }}" class="nav-link {{ request()->is('admin/pengaduan*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-user"></i>
         <p>
             Data Pengaduan
@@ -17,10 +17,18 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ url('admin/user') }}" class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}">
+    <a href="{{ url('admin/petugas') }}" class="nav-link {{ request()->is('admin/petugas*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-user"></i>
         <p>
-            Data User
+            Data Petugas
+        </p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ url('admin/pengguna') }}" class="nav-link {{ request()->is('admin/pengguna*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-user"></i>
+        <p>
+            Data Pengguna
         </p>
     </a>
 </li>

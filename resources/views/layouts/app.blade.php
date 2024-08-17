@@ -79,30 +79,18 @@
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         @if (auth()->user()->isAdmin())
                             @include('layouts.menu.admin')
-                        @else
-<<<<<<< HEAD
+                        @endif
+                        @if (auth()->user()->isPengguna())
                             @include('layouts.menu.pengguna')
-                            <li class="nav-header">Profile</li>
-                            <li class="nav-item">
-                                <a href="{{ url('pengguna/profile') }}"
-                                    class="nav-link {{ request()->is('pengguna/profile') ? 'active' : '' }}">
-=======
-                            @include('layouts.menu.sales')
                         @endif
                         <li class="nav-header">Profile</li>
-                            <li class="nav-item">
-                                <a href="{{ url('profile') }}"
-                                    class="nav-link {{ request()->is('profile') ? 'active' : '' }}">
->>>>>>> origin/main
-                                    <i class="nav-icon fas fa-user-edit"></i>
-                                    <p>Update Profile</p>
-                                </a>
-                            </li>
-                            <br>
-<<<<<<< HEAD
-                        @endif
-=======
->>>>>>> origin/main
+                        <li class="nav-item">
+                            <a href="{{ url('profile') }}"
+                                class="nav-link {{ request()->is('profile') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user-edit"></i>
+                                <p>Update Profile</p>
+                            </a>
+                        </li>
                         <br>
                         <li class="nav-header">
                             <button type="button" data-toggle="modal" data-target="#modal-logout"

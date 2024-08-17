@@ -95,18 +95,18 @@
                             </li>
                             <br>
                         @else
-                            @include('layouts.menu.sales')
+                            @include('layouts.menu.pengguna')
                             <li class="nav-header">Profile</li>
                             <li class="nav-item">
-                                <a href="{{ url('sales/profile') }}"
-                                    class="nav-link {{ request()->is('sales/profile') ? 'active' : '' }}">
+                                <a href="{{ url('pengguna/profile') }}"
+                                    class="nav-link {{ request()->is('pengguna/profile') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-user-edit"></i>
                                     <p>Update Profile</p>
                                 </a>
                             </li>
                             <br>
                         @endif
-                            <br>
+                        <br>
                         <li class="nav-header">
                             <button type="button" data-toggle="modal" data-target="#modal-logout"
                                 class="btn btn-danger btn-block">Logout</button>

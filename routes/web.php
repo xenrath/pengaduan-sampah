@@ -22,3 +22,9 @@ Route::post('register', [\App\Http\Controllers\AuthController::class, 'register_
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
 });
+
+Route::middleware('pengguna')->prefix('pengguna')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Pengguna\HomeController::class, 'index']);
+    Route::resource('pengaduan', \App\Http\Controllers\Pengguna\PengaduanController::class);
+
+});

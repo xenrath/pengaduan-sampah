@@ -31,7 +31,7 @@
                             <h3>
                                 10&nbsp;data
                             </h3>
-                            <p>Data Barang</p>
+                            <p>Data Pengaduan</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-boxes"></i>

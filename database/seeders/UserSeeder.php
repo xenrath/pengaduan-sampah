@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'nik' => 'pengguna',
                 'telp' => '087730105844',
                 'password' => bcrypt('pengguna'),
-                'role' => 'user',
+                'role' => 'pengguna',
             ],
         ];
 

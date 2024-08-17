@@ -81,7 +81,53 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-
         return redirect('login');
+    }
+
+    public function profile()
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        return view('profile', compact('user'));
+    }
+
+    public function profile_proses(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'nik' => 'required|unique:users,nik,' . auth()->user()->id,
+            'telp' => 'required|unique:users,telp,' . auth()->user()->id,
+            'password' => 'nullable|confirmed',
+        ], [
+            'nama.required' => 'Nama Lengkap harus diisi!',
+            'nik.required' => 'NIK harus diisi!',
+            'telp.required' => 'Nomor Telepon harus diisi!',
+            'password.required' => 'Konfirmasi Password tidak sesuai!',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Error', 'Isi data dengan benar!');
+            return back()->withInput()->withErrors($validator);
+        }
+
+        if ($request->password) {
+            $password = bcrypt($request->password);
+        } else {
+            $password = auth()->user()->password;
+        }
+
+        $user = User::where('id', auth()->user()->id)->update([
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'telp' => $request->telp,
+            'password' => $password,
+        ]);
+
+        if (!$user) {
+            alert()->error('Error', 'Gagal memperbarui Profile!');
+            return back();
+        }
+
+        alert()->success('Success', 'Berhasil memperbarui Profile');
+        return back();
     }
 }

@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // $pengaduans = Pengaduan::where()
         return view('admin.index');
     }
 }

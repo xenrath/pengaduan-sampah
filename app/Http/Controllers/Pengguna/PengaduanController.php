@@ -5,23 +5,17 @@ namespace App\Http\Controllers\Pengguna;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Gambar;
 use App\Models\Pengaduan;
-use App\Models\Vendor;
 use Illuminate\Support\Facades\Validator;
 
 class PengaduanController extends Controller
 {
     public function index()
     {
-        $pengaduans = Pengaduan::all();
-        return view('pengguna.pengaduan.index', compact('pengaduans'));
-    }
-
-    public function create()
-    {
         return view('pengguna.pengaduan.create');
     }
-
+    
     public function store(Request $request)
     {
         $validator = Validator::make(
@@ -31,8 +25,8 @@ class PengaduanController extends Controller
                 'latitude' => 'required',
             ],
             [
-                'alamat.required' => 'Masukkan tujuan muat',
-                'latitude.required' => 'Pilih titik tujuan',
+                'alamat.required' => 'Masukkan alamat',
+                'latitude.required' => 'Pilih titik lokasi',
             ]
         );
 
@@ -41,22 +35,34 @@ class PengaduanController extends Controller
             return back()->withInput()->with('error', $error);
         }
 
-        $kode = $this->kode();
-
-        Pengaduan::create(array_merge(
+        $pengaduan = Pengaduan::create(array_merge(
             $request->all(),
             [
-                'kode_alamat' => $this->kode(),
-                'tanggal_awal' => Carbon::now('Asia/Jakarta'),
-                'pelanggan_id' => $request->pelanggan_id,
-                'telp' => $request->telp,
+                'user_id' => auth()->user()->id,
+                'patokan' => $request->patokan,
                 'alamat' => $request->alamat,
+                'keterangan' => $request->keterangan,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
             ],
         ));
 
-        return redirect('pengguna/pengaduan')->with('success', 'Berhasil menambahkan tujuan muat');
+        if ($request->has('gambar')) {
+            $gambars = $request->file('gambar');
+
+            foreach ($gambars as $gambar) {
+                $name = str_replace(' ', '', $gambar->getClientOriginalName());
+                $namagambar = 'gambar/' . date('mYdHs') . random_int(1, 10) . '_' . $name;
+                $gambar->storeAs('public/uploads', $namagambar);
+
+                Gambar::create([
+                    'pengaduan_id' => $pengaduan->id,
+                    'gambar' => $namagambar
+                ]);
+            }
+        }
+
+        return redirect('pengguna/pengaduan')->with('success', 'Berhasil menambahkan');
     }
 
 }

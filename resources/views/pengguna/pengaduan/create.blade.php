@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Pengaduan')
+@section('title', 'Buat Pengaduan')
 
 @section('content')
     <style>
@@ -13,11 +13,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Tambah Pengaduan</h1>
+                    <h1 class="m-0">Buat Pengaduan</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url('admin/pengaduan') }}">Tambah Pengaduan</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('pengguna/pengaduan') }}">Buat Pengaduan</a></li>
                         <li class="breadcrumb-item active"></li>
                     </ol>
                 </div>
@@ -38,11 +38,11 @@
                     @endforeach
                 </div>
             @endif
-            <form action="{{ url('admin/pengaduan') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <form action="{{ url('pengguna/pengaduan') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Pengaduan</h3>
+                        <h3 class="card-title">Buat Pengaduan</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -63,7 +63,15 @@
                         </div>
                         <div class="form-group">
                             <label for="keterangan">Keterangan</label>
-                            <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukan alamat">{{ old('alamat') }}</textarea>
+                            <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukan keterangan">{{ old('alamat') }}</textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="gambar">Foto Lokasi</label>
+                            <input class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar[]"
+                                type="file" accept="image/*" multiple />
+                            @error('gambar')
+                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="card-footer text-right">

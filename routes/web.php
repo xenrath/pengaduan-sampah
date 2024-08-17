@@ -29,4 +29,5 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 Route::middleware('pengguna')->prefix('pengguna')->group(function () {
     Route::get('/', [\App\Http\Controllers\Pengguna\HomeController::class, 'index']);
     Route::resource('pengaduan', \App\Http\Controllers\Pengguna\PengaduanController::class);
+    Route::resource('list-pengaduan', \App\Http\Controllers\Pengguna\ListPengaduanController::class);
 });

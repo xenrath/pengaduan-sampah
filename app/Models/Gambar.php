@@ -9,11 +9,13 @@ class Gambar extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'pengaduan_id',
         'gambar',
     ];
 
-    public function gambar()
+    public function pengaduan()
     {
-        return $this->hasMany(Gambar::class);
+        return $this->belongsTo(Pengaduan::class);
     }
+
 }

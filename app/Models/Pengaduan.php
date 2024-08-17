@@ -12,7 +12,6 @@ class Pengaduan extends Model
 
     protected $fillable = [
         'user_id',
-        'gambar_id',
         'keterangan',
         'alamat',
         'patokan',
@@ -27,6 +26,6 @@ class Pengaduan extends Model
 
     public function gambar()
     {
-        return $this->belongsTo(Gambar::class);
+        return $this->hasMany(Gambar::class);
     }
 }

@@ -20,5 +20,5 @@ Route::get('register', [\App\Http\Controllers\AuthController::class, 'register']
 Route::post('register', [\App\Http\Controllers\AuthController::class, 'register_proses']);
 
 Route::middleware('admin')->prefix('admin')->group(function () {
-    Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
 });

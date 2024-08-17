@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -47,19 +48,19 @@ class AuthController extends Controller
     public function login()
     {
         if (auth()->check()) {
-            return redirect('check-user');
+            return redirect('/');
         } else {
             return view('login');
         }
     }
 
-    public function proses_login(Request $request)
+    public function login_proses(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'telp' => 'required',
             'password' => 'required',
         ], [
-            'telp.required' => 'No. Telepon harus diisi!',
+            'telp.required' => 'Nomor Telepon harus diisi!',
             'password.required' => 'Password harus diisi!',
         ]);
 
@@ -70,7 +71,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['telp' => $request->telp, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect('check-user');
+            return redirect('/');
         } else {
             alert()->error('Error', 'No. Telepon atau Password salah!');
             return back()->withInput();
@@ -80,20 +81,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-
-        return redirect('login');
-    }
-
-    public function check_user()
-    {
-        if (auth()->check()) {
-            if (auth()->user()->isAdmin()) {
-                return redirect('admin');
-            }
-            if (auth()->user()->role == 'user') {
-                return redirect('user');
-            }
-        }
 
         return redirect('login');
     }

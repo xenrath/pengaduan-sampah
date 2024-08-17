@@ -14,8 +14,8 @@
 
 <body>
 
-    {{-- @include('sweetalert::alert') --}}
-
+    @include('sweetalert::alert')
+    
     <div class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
@@ -36,7 +36,7 @@
                                     value="{{ old('telp') }}">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
-                                        <span class="fas fa-telp"></span>
+                                        <span class="fas fa-phone"></span>
                                     </div>
                                 </div>
                             </div>

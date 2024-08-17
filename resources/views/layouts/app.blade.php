@@ -46,15 +46,9 @@
 
 <body class="hold-transition sidebar-mini">
 
-    {{-- @include('sweetalert::alert') --}}
+    @include('sweetalert::alert')
 
     <div class="wrapper">
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('storage/uploads/logo.png') }}" alt="Riva Jaya" height="80"
-                width="80">
-        </div>
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -72,8 +66,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('storage/uploads/logo.png') }}" alt="Sistem Riva Jaya" class="brand-image">
-                <span class="brand-text font-wight-bold">Riva Jaya Abadi</span>
+                <img src="{{ asset('storage/uploads/asset/logo.png') }}" alt="Pengaduan Sampah" class="brand-image">
+                <span class="brand-text font-wight-bold">Pengaduan Sampah</span>
             </a>
 
             <!-- Sidebar -->
@@ -85,27 +79,30 @@
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         @if (auth()->user()->isAdmin())
                             @include('layouts.menu.admin')
-                            <li class="nav-header">Profile</li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/profile') }}"
-                                    class="nav-link {{ request()->is('admin/profile') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user-edit"></i>
-                                    <p>Update Profile</p>
-                                </a>
-                            </li>
-                            <br>
                         @else
+<<<<<<< HEAD
                             @include('layouts.menu.pengguna')
                             <li class="nav-header">Profile</li>
                             <li class="nav-item">
                                 <a href="{{ url('pengguna/profile') }}"
                                     class="nav-link {{ request()->is('pengguna/profile') ? 'active' : '' }}">
+=======
+                            @include('layouts.menu.sales')
+                        @endif
+                        <li class="nav-header">Profile</li>
+                            <li class="nav-item">
+                                <a href="{{ url('profile') }}"
+                                    class="nav-link {{ request()->is('profile') ? 'active' : '' }}">
+>>>>>>> origin/main
                                     <i class="nav-icon fas fa-user-edit"></i>
                                     <p>Update Profile</p>
                                 </a>
                             </li>
                             <br>
+<<<<<<< HEAD
                         @endif
+=======
+>>>>>>> origin/main
                         <br>
                         <li class="nav-header">
                             <button type="button" data-toggle="modal" data-target="#modal-logout"
@@ -120,9 +117,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
             @yield('content')
-
         </div>
         <!-- /.content-wrapper -->
 
@@ -136,7 +131,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Yakin keluar sistem <strong>Sistem Riva Jaya</strong>?</p>
+                        <p>Yakin keluar sistem <strong>Pengaduan Sampah</strong>?</p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -150,11 +145,10 @@
         </div>
 
         <footer class="main-footer">
-            <strong class="text-primary">Sistem Riva Jaya.</strong>
-            Designed by
-            <strong class="text-primary">kiwari.com</strong>
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>V.1</b>
+                <b>Version</b> 3.2.0
             </div>
         </footer>
 
@@ -212,51 +206,10 @@
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
     <!-- bs-custom-file-input -->
     <script src="{{ asset('adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-
     <!-- Select2 -->
     <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
-
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            bsCustomFileInput.init();
-            $('.select2').select2()
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#datatables66').DataTable({
-                "lengthMenu": [
-                    [-1],
-                    ["All"]
-                ] // Use -1 to display all rows, and "All" as the label
-            });
-        });
-
-        $(document).ready(function() {
-            $('#datatables').DataTable();
-        });
-        $(document).ready(function() {
-            $('#datatables1').DataTable();
-        });
-    </script>
-
-    <script>
-        $(function() {
-            $('#compose-textarea').summernote()
-        })
-    </script>
 </body>
 
 </html>

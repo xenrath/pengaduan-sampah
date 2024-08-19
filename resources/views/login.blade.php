@@ -15,7 +15,7 @@
 <body>
 
     @include('sweetalert::alert')
-    
+
     <div class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
@@ -32,27 +32,41 @@
                         @method('post')
                         <div class="form-group mb-2">
                             <div class="input-group">
-                                <input type="tel" class="form-control" name="telp" placeholder="Nomor Telepon"
-                                    value="{{ old('telp') }}">
+                                <input type="tel" class="form-control @error('telp') is-invalid @enderror"
+                                    name="telp" placeholder="Nomor Telepon" value="{{ old('telp') }}">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-phone"></span>
                                     </div>
                                 </div>
+                                @error('telp')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <small class="text-muted">(08xxxxxxxxxx)</small>
                         </div>
                         <div class="form-group mb-2">
                             <div class="input-group">
-                                <input type="password" class="form-control" name="password" placeholder="Password">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                    name="password" placeholder="Password">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
+                                @error('password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block mt-4">Login</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block my-4">Login</button>
+                            <a href="{{ url('register') }}">Belum punya akun? Daftar</a>
+                        </div>
                     </form>
                 </div>
             </div>

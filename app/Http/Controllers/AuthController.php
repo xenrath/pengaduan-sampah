@@ -14,33 +14,37 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function proses_register(Request $request)
+    public function register_proses(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'jabatan' => 'required',
-            'email' => 'required|email',
-            'password' => 'required'
+            'nik' => 'required|unique:users,nik',
+            'telp' => 'required|unique:users,telp',
+            'password' => 'required|confirmed'
         ], [
             'nama.required' => 'Nama Lengkap harus diisi!',
-            'jabatan.required' => 'Jabatan harus diisi!',
-            'email.required' => 'Email Institusi harus diisi!',
-            'email.email' => 'Email Institusi salah!',
+            'nik.required' => 'NIK harus diisi!',
+            'nik.unique' => 'NIK sudah digunakan!',
+            'telp.required' => 'Nomor Telepon harus diisi!',
+            'telp.unique' => 'Nomor Telepon salah!',
             'password.required' => 'Password harus diisi!',
+            'password.confirmed' => 'Konfirmasi Password tidak sesuai!',
         ]);
 
         if ($validator->fails()) {
-            $error = $validator->errors()->all();
             alert()->error('Error!', 'Isi data dengan benar!');
-            return back()->withInput()->with('error', $error);
+            return back()->withInput()->withErrors($validator->errors());
         }
 
-        User::create(array_merge($request->all(), [
+        User::create([
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'telp' => $request->telp,
             'password' => bcrypt($request->password),
-            'role' => 'tamu'
-        ]));
+            'role' => 'pengguna'
+        ]);
 
-        alert()->success('Success', 'Berhasil melakukan pendaftaran');
+        alert()->success('Success', 'Berhasil melakukan Pendaftaran');
 
         return redirect('login');
     }

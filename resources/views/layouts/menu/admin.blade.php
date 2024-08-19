@@ -9,7 +9,7 @@
 </li>
 <li class="nav-header">Menu</li>
 <li class="nav-item">
-    <a href="{{ url('admin/pengaduan') }}" class="nav-link {{ request()->is('admin/pengaduan*') ? 'active' : '' }}">
+    <a href="{{ url('admin/pengaduan-menunggu') }}" class="nav-link {{ request()->is('admin/pengaduan-menunggu*') ? 'active' : '' }}">
         <i class="nav-icon far fa-circle"></i>
         <p>
             Pengaduan Menunggu
@@ -17,7 +17,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ url('admin/pengaduan') }}" class="nav-link {{ request()->is('admin/pengaduan*') ? 'active' : '' }}">
+    <a href="{{ url('admin/pengaduan-proses') }}" class="nav-link {{ request()->is('admin/pengaduan-proses*') ? 'active' : '' }}">
         <i class="nav-icon far fa-circle"></i>
         <p>
             Pengaduan Proses
@@ -25,7 +25,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ url('admin/pengaduan') }}" class="nav-link {{ request()->is('admin/pengaduan*') ? 'active' : '' }}">
+    <a href="{{ url('admin/pengaduan-selesai') }}" class="nav-link {{ request()->is('admin/pengaduan-selesai*') ? 'active' : '' }}">
         <i class="nav-icon far fa-circle"></i>
         <p>
             Pengaduan Selesai

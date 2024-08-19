@@ -91,8 +91,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var defaultLat = -6.967463;
-            var defaultLng = 109.139252;
+            var defaultLat = -6.867241559586205;
+            var defaultLng = 109.13766080270332;
             var latitude = parseFloat(document.getElementById('latitude').value) || defaultLat;
             var longitude = parseFloat(document.getElementById('longitude').value) || defaultLng;
 

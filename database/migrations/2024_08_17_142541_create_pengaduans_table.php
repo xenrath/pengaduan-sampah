@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('keterangan')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->enum('status', ['menunggu', 'konfirmasi', 'proses', 'selesai']);
+            $table->enum('status', ['menunggu', 'konfirmasi', 'proses', 'selesai', 'tolak']);
             $table->timestamps();
         });
     }

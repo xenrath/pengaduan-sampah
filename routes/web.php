@@ -36,6 +36,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('pengaduan-menunggu', \App\Http\Controllers\Admin\PengaduanMenungguController::class);
 
     Route::resource('pengaduan-proses', \App\Http\Controllers\Admin\PengaduanProsesController::class);
+    
+    Route::resource('pengaduan-riwayat', \App\Http\Controllers\Admin\PengaduanRiwayatController::class);
 });
 
 Route::middleware('pengguna')->prefix('pengguna')->group(function () {

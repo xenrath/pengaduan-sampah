@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pengaduan Menunggu')
+@section('title', 'Riwayat Pengaduan')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Pengaduan Menunggu</h1>
+                    <h1 class="m-0">Riwayat Pengaduan</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -31,7 +31,8 @@
                                     <th class="text-center" style="width: 20px">No</th>
                                     <th>Nama Pengguna</th>
                                     <th>Keterangan</th>
-                                    <th class="text-center" style="width: 80px">Opsi</th>
+                                    <th class="text-center" style="width: 80px">Status</th>
+                                    <th class="text-center" style="width: 40px">Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,13 +42,16 @@
                                         <td>{{ $pengaduan->user->nama }}</td>
                                         <td>{{ $pengaduan->keterangan }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#modal-tolak-{{ $pengaduan->id }}">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modal-konfirmasi-{{ $pengaduan->id }}">
-                                                <i class="fas fa-check"></i>
+                                            @if ($pengaduan->status == 'selesai')
+                                                <span class="badge badge-success">Selesai</span>
+                                            @else
+                                                <span class="badge badge-danger">Tolak</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                                data-target="#modal-lihat-{{ $pengaduan->id }}">
+                                                <i class="fas fa-eye"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -62,74 +66,72 @@
     </section>
     <!-- /.card -->
     @foreach ($pengaduans as $pengaduan)
-        <div class="modal fade" id="modal-tolak-{{ $pengaduan->id }}">
+        <div class="modal fade" id="modal-lihat-{{ $pengaduan->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Tambah Pengaduan Menunggu</h4>
+                        <h4 class="modal-title">Detail Pengaduan</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('admin/pengaduan') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            Yakin tolak pengaduan dari <strong>{{ $pengaduan->user->nama }}</strong>?
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Nama Pengguna</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->user->nama }}
+                            </div>
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            <form action="{{ url('admin/pengaduan-menunggu/' . $pengaduan->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="btn btn-danger">Tolak</button>
-                            </form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Keterangan</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->keterangan }}
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="modal-konfirmasi-{{ $pengaduan->id }}">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Tambah Pengaduan Menunggu</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Alamat</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->alamat }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Patokan</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->patokan }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Lokasi</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="https://maps.google.com/maps?q={{ $pengaduan->latitude }},{{ $pengaduan->longitude }}"
+                                    class="btn btn-secondary btn-sm" target="_blank">Lihat Maps</a>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Gambar</strong>
+                            </div>
+                            <div class="col-md-6">
+                                @foreach ($pengaduan->gambar as $gambar)
+                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class="img-thumbnail mb-2"
+                                        alt="Gambar">
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
-                    <form action="{{ url('admin/pengaduan') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="nama">Nama Pengaduan Menunggu</label>
-                                <input type="text" class="form-control" id="nama" name="nama"
-                                    value="{{ old('nama') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="nik">NIK</label>
-                                <input type="text" class="form-control" id="nik" name="nik"
-                                    value="{{ old('nik') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="telp">
-                                    Nomor Telepon
-                                    <small>(08xxxxxxxxxx)</small>
-                                </label>
-                                <input type="text" class="form-control" id="telp" name="telp"
-                                    value="{{ old('telp') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="telp">Password</label>
-                                <p class="text-muted">password default :
-                                    <strong>pengaduan</strong>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    </div>
                 </div>
             </div>
         </div>

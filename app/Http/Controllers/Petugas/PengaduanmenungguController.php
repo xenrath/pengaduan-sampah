@@ -12,10 +12,10 @@ class PengaduanmenungguController extends Controller
 {
     public function index()
     {
-        $pengaduans = Pengaduan::where('status', 'menunggu')->get();
+        $pengaduans = Pengaduan::where('status', 'konfirmasi')->get();
+
         return view('petugas.menunggu.index', compact('pengaduans'));
     }
-
 
     public function proses_pengaduan(Request $request, $id)
     {

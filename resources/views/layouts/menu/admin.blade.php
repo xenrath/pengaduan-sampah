@@ -25,10 +25,10 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ url('admin/pengaduan-selesai') }}" class="nav-link {{ request()->is('admin/pengaduan-selesai*') ? 'active' : '' }}">
+    <a href="{{ url('admin/pengaduan-riwayat') }}" class="nav-link {{ request()->is('admin/pengaduan-riwayat*') ? 'active' : '' }}">
         <i class="nav-icon far fa-circle"></i>
         <p>
-            Pengaduan Selesai
+            Riwayat Pengaduan
         </p>
     </a>
 </li>

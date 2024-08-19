@@ -87,7 +87,7 @@
                             <p>Data Petugas</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-clipboard"></i>
+                            <i class="fas fa-user"></i>
                         </div>
                         <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -103,7 +103,7 @@
                             <p>Data Pengguna</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-clipboard-list"></i>
+                            <i class="fas fa-user"></i>
                         </div>
                         <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>

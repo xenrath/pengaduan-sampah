@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Petugas')
+@section('title', 'Pengguna')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Petugas</h1>
+                    <h1 class="m-0">Pengguna</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -40,7 +40,7 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Data Petugas</h3>
+                    <h3 class="card-title">Data Pengguna</h3>
                     <div class="float-right">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tambah">
                             <i class="fas fa-plus"></i> Tambah
@@ -60,18 +60,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($petugases as $petugas)
+                                @foreach ($penggunas as $pengguna)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $petugas->nama }}</td>
-                                        <td>{{ $petugas->telp }}</td>
+                                        <td>{{ $pengguna->nama }}</td>
+                                        <td>{{ $pengguna->telp }}</td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#modal-edit-{{ $petugas->id }}">
+                                                data-target="#modal-edit-{{ $pengguna->id }}">
                                                 <i class="fas fa-pen"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#modal-hapus-{{ $petugas->id }}">
+                                                data-target="#modal-hapus-{{ $pengguna->id }}">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -90,16 +90,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Petugas</h4>
+                    <h4 class="modal-title">Tambah Pengguna</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ url('admin/petugas') }}" method="POST">
+                <form action="{{ url('admin/pengguna') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama">Nama Petugas</label>
+                            <label for="nama">Nama Pengguna</label>
                             <input type="text" class="form-control" id="nama" name="nama"
                                 value="{{ old('nama') }}">
                         </div>
@@ -119,7 +119,7 @@
                         <div class="form-group">
                             <label for="telp">Password</label>
                             <p class="text-muted">password default :
-                                <strong>petugas</strong>
+                                <strong>pengguna</strong>
                             </p>
                         </div>
                     </div>
@@ -131,29 +131,29 @@
             </div>
         </div>
     </div>
-    @foreach ($petugases as $petugas)
-        <div class="modal fade" id="modal-edit-{{ $petugas->id }}">
+    @foreach ($penggunas as $pengguna)
+        <div class="modal fade" id="modal-edit-{{ $pengguna->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Perbarui Petugas</h4>
+                        <h4 class="modal-title">Perbarui Pengguna</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('admin/petugas/' . $petugas->id) }}" method="POST">
+                    <form action="{{ url('admin/pengguna/' . $pengguna->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="nama">Nama Petugas</label>
+                                <label for="nama">Nama Pengguna</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
-                                    value="{{ $petugas->nama }}">
+                                    value="{{ $pengguna->nama }}">
                             </div>
                             <div class="form-group">
                                 <label for="nik">NIK</label>
                                 <input type="text" class="form-control" id="nik" name="nik"
-                                    value="{{ $petugas->nik }}">
+                                    value="{{ $pengguna->nik }}">
                             </div>
                             <div class="form-group">
                                 <label for="telp">
@@ -161,12 +161,12 @@
                                     <small>(08xxxxxxxxxx)</small>
                                 </label>
                                 <input type="text" class="form-control" id="telp" name="telp"
-                                    value="{{ $petugas->telp }}">
+                                    value="{{ $pengguna->telp }}">
                             </div>
                             <div class="form-group">
                                 <label for="telp">Password</label>
                                 <button type="button" class="btn btn-warning d-block" data-dismiss="modal"
-                                    data-toggle="modal" data-target="#modal-reset-{{ $petugas->id }}">Reset
+                                    data-toggle="modal" data-target="#modal-reset-{{ $pengguna->id }}">Reset
                                     Password</button>
                             </div>
                         </div>
@@ -178,40 +178,40 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-reset-{{ $petugas->id }}">
+        <div class="modal fade" id="modal-reset-{{ $pengguna->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Hapus petugas</h4>
+                        <h4 class="modal-title">Hapus pengguna</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Yakin reset password petugas <strong>{{ $petugas->nama }}</strong>?</p>
+                        <p>Yakin reset password pengguna <strong>{{ $pengguna->nama }}</strong>?</p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a href="{{ url('admin/petugas/reset/' . $petugas->id) }}" class="btn btn-warning">Reset</a>
+                        <a href="{{ url('admin/pengguna/reset/' . $pengguna->id) }}" class="btn btn-warning">Reset</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-hapus-{{ $petugas->id }}">
+        <div class="modal fade" id="modal-hapus-{{ $pengguna->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Hapus petugas</h4>
+                        <h4 class="modal-title">Hapus pengguna</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Yakin hapus petugas <strong>{{ $petugas->nama }}</strong>?</p>
+                        <p>Yakin hapus pengguna <strong>{{ $pengguna->nama }}</strong>?</p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <form action="{{ url('admin/petugas/' . $petugas->id) }}" method="POST">
+                        <form action="{{ url('admin/pengguna/' . $pengguna->id) }}" method="POST">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Hapus</button>

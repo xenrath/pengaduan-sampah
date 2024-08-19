@@ -24,8 +24,11 @@ Route::post('profile', [\App\Http\Controllers\AuthController::class, 'profile_pr
 
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
-    Route::resource('petugas', \App\Http\Controllers\Admin\PetugasController::class);
-    Route::resource('pengguna', \App\Http\Controllers\Admin\PetugasController::class);
+
+    Route::get('pengguna/reset/{id}', [\App\Http\Controllers\Admin\PenggunaController::class, 'reset']);
+    Route::resource('pengguna', \App\Http\Controllers\Admin\PenggunaController::class);
+
+    Route::get('petugas/reset/{id}', [\App\Http\Controllers\Admin\PetugasController::class, 'reset']);
     Route::resource('petugas', \App\Http\Controllers\Admin\PetugasController::class);
 });
 

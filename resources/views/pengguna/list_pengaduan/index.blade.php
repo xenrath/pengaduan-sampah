@@ -39,11 +39,6 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data Pengaduan Saya</h3>
-                    <div class="float-right">
-                        <a href="{{ url('pengguna/pengaduan/create') }}" class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus"></i> Tambah
-                        </a>
-                    </div>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped table-hover">
@@ -63,8 +58,7 @@
                                     <td>{{ $pengaduan->keterangan }}</td>
                                     <td class="text-center">
                                         <button type="submit" class="btn btn-warning btn-sm">
-                                            <img src="{{ asset('storage/uploads/gambar/wall-clock.png') }}" height="17"
-                                                width="17" alt="menunggu">
+                                            <i class="fas fa-clock"></i>
                                         </button>
                                     </td>
                                 </tr>

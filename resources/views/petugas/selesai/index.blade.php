@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Pengaduan Saya')
+@section('title', 'Data Pengaduan Selesai')
 
 @section('content')
 
@@ -12,11 +12,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Data Pengaduan Saya</h1>
+                    <h1 class="m-0">Data Pengaduan Selesai</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Data Pengaduan Saya</li>
+                        <li class="breadcrumb-item active">Data Pengaduan Selesai</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,14 +36,21 @@
                     {{ session('success') }}
                 </div>
             @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5>
+                        <i class="icon fas fa-ban"></i> Gagal Menyimpan!
+                    </h5>
+                    @foreach (session('error') as $error)
+                        - {{ $error }} <br>
+                    @endforeach
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Data Pengaduan Saya</h3>
-                    <div class="float-right">
-                        <a href="{{ url('pengguna/pengaduan/create') }}" class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus"></i> Tambah
-                        </a>
-                    </div>
+                    <h3 class="card-title">Data Pengaduan Selesai</h3>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped table-hover">
@@ -62,38 +69,14 @@
                                     <td>{{ $pengaduan->alamat }}</td>
                                     <td>{{ $pengaduan->keterangan }}</td>
                                     <td class="text-center">
-                                        <button type="submit" class="btn btn-warning btn-sm">
-                                            <img src="{{ asset('storage/uploads/gambar/wall-clock.png') }}" height="17"
-                                                width="17" alt="menunggu">
+                                        <a href="{{ url('petugas/selesai/' . $pengaduan->id) }}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check-square"></i>
                                         </button>
                                     </td>
                                 </tr>
-                                <div class="modal fade" id="modal-hapus-{{ $pengaduan->id }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Hapus</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Yakin hapus pengaduan ?</p>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Batal</button>
-                                                <form action="{{ url('admin/pengaduan/' . $pengaduan->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             @endforeach
                         </tbody>
                     </table>

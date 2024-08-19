@@ -15,6 +15,9 @@ class Pengaduan extends Model
         'keterangan',
         'alamat',
         'patokan',
+        'tanggal_proses',
+        'foto',
+        'status',
         'latitude',
         'longitude',
     ];

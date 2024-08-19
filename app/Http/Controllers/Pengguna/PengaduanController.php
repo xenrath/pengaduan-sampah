@@ -44,6 +44,7 @@ class PengaduanController extends Controller
                 'keterangan' => $request->keterangan,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
+                'status' => 'menunggu',
             ],
         ));
 

@@ -46,4 +46,10 @@ Route::middleware('pengguna')->prefix('pengguna')->group(function () {
 
 Route::middleware('petugas')->prefix('petugas')->group(function () {
     Route::get('/', [\App\Http\Controllers\Petugas\HomeController::class, 'index']);
+    Route::resource('menunggu', \App\Http\Controllers\Petugas\PengaduanmenungguController::class);
+    Route::resource('diproses', \App\Http\Controllers\Petugas\PengaduandiprosesController::class);
+    Route::resource('selesai', \App\Http\Controllers\Petugas\PengaduanselesaiController::class);
+
+    Route::post('proses-pengaduan/{id}', [\App\Http\Controllers\Petugas\PengaduanmenungguController::class, 'proses_pengaduan']);
+    Route::post('selesai-pengaduan/{id}', [\App\Http\Controllers\Petugas\PengaduandiprosesController::class, 'selesai_pengaduan']);
 });

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Pengaduan Saya')
+@section('title', 'Data Pengaduan Menunggu')
 
 @section('content')
 
@@ -12,11 +12,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Data Pengaduan Saya</h1>
+                    <h1 class="m-0">Data Pengaduan Menunggu</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Data Pengaduan Saya</li>
+                        <li class="breadcrumb-item active">Data Pengaduan Menunggu</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,14 +36,21 @@
                     {{ session('success') }}
                 </div>
             @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5>
+                        <i class="icon fas fa-ban"></i> Gagal Menyimpan!
+                    </h5>
+                    @foreach (session('error') as $error)
+                        - {{ $error }} <br>
+                    @endforeach
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Data Pengaduan Saya</h3>
-                    <div class="float-right">
-                        <a href="{{ url('pengguna/pengaduan/create') }}" class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus"></i> Tambah
-                        </a>
-                    </div>
+                    <h3 class="card-title">Data Pengaduan Menunggu</h3>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped table-hover">
@@ -62,34 +69,47 @@
                                     <td>{{ $pengaduan->alamat }}</td>
                                     <td>{{ $pengaduan->keterangan }}</td>
                                     <td class="text-center">
-                                        <button type="submit" class="btn btn-warning btn-sm">
-                                            <img src="{{ asset('storage/uploads/gambar/wall-clock.png') }}" height="17"
-                                                width="17" alt="menunggu">
+                                        <a href="{{ url('petugas/menunggu/' . $pengaduan->id) }}"
+                                            class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#modal-menunggu-{{ $pengaduan->id }}">
+                                            <i class="fas fa-clock"></i>
                                         </button>
                                     </td>
                                 </tr>
-                                <div class="modal fade" id="modal-hapus-{{ $pengaduan->id }}">
+                                <div class="modal fade" id="modal-menunggu-{{ $pengaduan->id }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Hapus</h4>
+                                                <h4 class="modal-title">Proses</h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Yakin hapus pengaduan ?</p>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Batal</button>
-                                                <form action="{{ url('admin/pengaduan/' . $pengaduan->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                                </form>
+                                                <div style="text-align: left;">
+                                                    <form action="{{ url('petugas/proses-pengaduan/' . $pengaduan->id) }}"
+                                                        method="POST" enctype="multipart/form-data" autocomplete="off">
+                                                        @csrf
+                                                        <div class="card-body">
+                                                            <div class="form-group">
+                                                                <label for="tanggal_proses">Pilih Tanggal Proses</label>
+                                                                <input class="form-control" id="tanggal_proses"
+                                                                    name="tanggal_proses" type="date"
+                                                                    value="{{ Request::get('tanggal_proses') }}"
+                                                                    max="{{ date('Y-m-d') }}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-right">
+                                                            <button type="reset" class="btn btn-secondary">Reset</button>
+                                                            <button type="submit" class="btn btn-primary"
+                                                                id="submitBtn">Proses</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

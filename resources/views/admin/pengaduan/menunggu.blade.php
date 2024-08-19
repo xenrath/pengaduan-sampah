@@ -136,6 +136,17 @@
                                     class="btn btn-secondary btn-sm" target="_blank">Lihat Maps</a>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Gambar</strong>
+                            </div>
+                            <div class="col-md-6">
+                                @foreach ($pengaduan->gambar as $gambar)
+                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class="img-thumbnail mb-2"
+                                        alt="Gambar">
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

@@ -31,7 +31,8 @@
                                     <th class="text-center" style="width: 20px">No</th>
                                     <th>Nama Pengguna</th>
                                     <th>Keterangan</th>
-                                    <th class="text-center" style="width: 80px">Opsi</th>
+                                    <th>Status</th>
+                                    <th class="text-center" style="width: 20px">Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,14 +41,17 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $pengaduan->user->nama }}</td>
                                         <td>{{ $pengaduan->keterangan }}</td>
+                                        <td>
+                                            @if ($pengaduan->status == 'konfirmasi')
+                                                <span class="badge badge-primary">Konfirmasi</span>
+                                            @else
+                                                <span class="badge badge-info">Proses</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#modal-tolak-{{ $pengaduan->id }}">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modal-konfirmasi-{{ $pengaduan->id }}">
-                                                <i class="fas fa-check"></i>
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                                data-target="#modal-lihat-{{ $pengaduan->id }}">
+                                                <i class="fas fa-eye"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -62,7 +66,7 @@
     </section>
     <!-- /.card -->
     @foreach ($pengaduans as $pengaduan)
-        <div class="modal fade" id="modal-tolak-{{ $pengaduan->id }}">
+        <div class="modal fade" id="modal-lihat-{{ $pengaduan->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -71,65 +75,35 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('admin/pengaduan') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            Yakin tolak pengaduan dari <strong>{{ $pengaduan->user->nama }}</strong>?
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama">Nama Pengaduan Menunggu</label>
+                            <input type="text" class="form-control" id="nama" name="nama"
+                                value="{{ old('nama') }}">
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            <form action="{{ url('admin/pengaduan-menunggu/' . $pengaduan->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="btn btn-danger">Tolak</button>
-                            </form>
+                        <div class="form-group">
+                            <label for="nik">NIK</label>
+                            <input type="text" class="form-control" id="nik" name="nik"
+                                value="{{ old('nik') }}">
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="modal-konfirmasi-{{ $pengaduan->id }}">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Tambah Pengaduan Menunggu</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <div class="form-group">
+                            <label for="telp">
+                                Nomor Telepon
+                                <small>(08xxxxxxxxxx)</small>
+                            </label>
+                            <input type="text" class="form-control" id="telp" name="telp"
+                                value="{{ old('telp') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="telp">Password</label>
+                            <p class="text-muted">password default :
+                                <strong>pengaduan</strong>
+                            </p>
+                        </div>
                     </div>
-                    <form action="{{ url('admin/pengaduan') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="nama">Nama Pengaduan Menunggu</label>
-                                <input type="text" class="form-control" id="nama" name="nama"
-                                    value="{{ old('nama') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="nik">NIK</label>
-                                <input type="text" class="form-control" id="nik" name="nik"
-                                    value="{{ old('nik') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="telp">
-                                    Nomor Telepon
-                                    <small>(08xxxxxxxxxx)</small>
-                                </label>
-                                <input type="text" class="form-control" id="telp" name="telp"
-                                    value="{{ old('telp') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="telp">Password</label>
-                                <p class="text-muted">password default :
-                                    <strong>pengaduan</strong>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    </div>
                 </div>
             </div>
         </div>

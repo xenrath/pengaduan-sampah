@@ -21,7 +21,7 @@ class PengaduanMenungguController extends Controller
             'status' => 'tolak'
         ]);
 
-        alert()->success('Success', 'Berhasil mengonfirmasi Pengaduan');
+        alert()->success('Success', 'Berhasil menolak Pengaduan');
         return back();
     }
 

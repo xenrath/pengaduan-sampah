@@ -32,8 +32,10 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('petugas', \App\Http\Controllers\Admin\PetugasController::class);
 
     Route::get('pengaduan-menunggu/konfirmasi/{id}', [\App\Http\Controllers\Admin\PengaduanMenungguController::class, 'konfirmasi']);
-    Route::get('pengaduan-menunggu/tolak/{id}', [\App\Http\Controllers\Admin\PengaduanMenungguController::class, 'konfirmasi']);
+    Route::get('pengaduan-menunggu/tolak/{id}', [\App\Http\Controllers\Admin\PengaduanMenungguController::class, 'tolak']);
     Route::resource('pengaduan-menunggu', \App\Http\Controllers\Admin\PengaduanMenungguController::class);
+
+    Route::resource('pengaduan-proses', \App\Http\Controllers\Admin\PengaduanProsesController::class);
 });
 
 Route::middleware('pengguna')->prefix('pengguna')->group(function () {

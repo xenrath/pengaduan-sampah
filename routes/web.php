@@ -36,12 +36,13 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::resource('pengaduan-menunggu', \App\Http\Controllers\Admin\PengaduanMenungguController::class);
 
     Route::resource('pengaduan-proses', \App\Http\Controllers\Admin\PengaduanProsesController::class);
-    
+
     Route::resource('pengaduan-riwayat', \App\Http\Controllers\Admin\PengaduanRiwayatController::class);
 });
 
 Route::middleware('pengguna')->prefix('pengguna')->group(function () {
     Route::get('/', [\App\Http\Controllers\Pengguna\HomeController::class, 'index']);
+    Route::resource('postingan', \App\Http\Controllers\Pengguna\PostinganController::class);
     Route::resource('pengaduan', \App\Http\Controllers\Pengguna\PengaduanController::class);
     Route::resource('list-pengaduan', \App\Http\Controllers\Pengguna\ListPengaduanController::class);
 });

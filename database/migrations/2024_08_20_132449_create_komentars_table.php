@@ -8,17 +8,19 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('gambars', function (Blueprint $table) {
+        Schema::create('komentars', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pengaduan_id')->nullable();
+            $table->unsignedBigInteger('pengaduan_id');
             $table->foreign('pengaduan_id')->references('id')->on('pengaduans')->onDelete('set null');
-            $table->string('gambar')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->string('komentar');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('gambars');
+        Schema::dropIfExists('komentars');
     }
 };

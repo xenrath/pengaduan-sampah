@@ -46,15 +46,18 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <img class="img-fluid pad"
+                                <img class="img-fluid pad mb-4"
                                     src="{{ asset('storage/uploads/' . $pengaduan->gambar->first()->gambar) }}"
                                     alt="Photo">
-                                <p>{{ $pengaduan->keterangan }}</p>
-                                <p>{{ $pengaduan->alamat }} ({{ $pengaduan->patokan }})</p>
-                                <button type="button" class="btn btn-info btn-sm">
+                                <p>
+                                    {{ $pengaduan->keterangan }}
+                                    <br>
+                                    {{ $pengaduan->alamat }} ({{ $pengaduan->patokan }})
+                                </p>
+                                <a href="{{ url('pengguna/postingan/' . $pengaduan->id) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-eye"></i>
                                     Detail
-                                </button>
+                                </a>
                                 <button type="button" class="btn btn-secondary btn-sm">
                                     <i class="fas fa-map-marked-alt"></i>
                                     Maps

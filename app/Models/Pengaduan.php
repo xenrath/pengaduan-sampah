@@ -31,4 +31,9 @@ class Pengaduan extends Model
     {
         return $this->hasMany(Gambar::class);
     }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }

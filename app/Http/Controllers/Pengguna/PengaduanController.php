@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Gambar;
 use App\Models\Pengaduan;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class PengaduanController extends Controller
@@ -15,7 +16,7 @@ class PengaduanController extends Controller
     {
         return view('pengguna.pengaduan.create');
     }
-    
+
     public function store(Request $request)
     {
         $validator = Validator::make(
@@ -48,6 +49,10 @@ class PengaduanController extends Controller
             ],
         ));
 
+        $gambar = $request->gambar;
+        if ($gambar == null) {
+            return back()->with('erorrs', 'Foto tidak boleh kosong');
+        }
         if ($request->has('gambar')) {
             $gambars = $request->file('gambar');
 
@@ -63,7 +68,40 @@ class PengaduanController extends Controller
             }
         }
 
+        $user = User::where('id', $pengaduan->user_id)->first();
+        $message = $user->nama . ' ' . "membuat pengaduan baru"  . PHP_EOL;
+        $telp = User::where('role', 'admin')->value('telp');
+
+        $this->kirim($telp, $message);
+
         return redirect('pengguna/pengaduan')->with('success', 'Berhasil menambahkan');
     }
 
+    public function kirim($telp, $message)
+    {
+        $data = [
+            'target' => $telp,
+            'message' => $message
+        ];
+
+        $curl = curl_init();
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                "Authorization: bW4ZATiVth1!kKzeqbvH",
+            )
+        );
+
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($curl, CURLOPT_URL, "https://api.fonnte.com/send");
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        $result = json_decode(curl_exec($curl));
+
+        return $result;
+    }
 }

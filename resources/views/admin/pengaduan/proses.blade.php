@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pengaduan Menunggu')
+@section('title', 'Pengaduan Proses')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Pengaduan Menunggu</h1>
+                    <h1 class="m-0">Pengaduan Proses</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -70,35 +70,63 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Tambah Pengaduan Menunggu</h4>
+                        <h4 class="modal-title">Detail Pengaduan</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nama">Nama Pengaduan Menunggu</label>
-                            <input type="text" class="form-control" id="nama" name="nama"
-                                value="{{ old('nama') }}">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Nama Pengguna</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->user->nama }}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="nik">NIK</label>
-                            <input type="text" class="form-control" id="nik" name="nik"
-                                value="{{ old('nik') }}">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Keterangan</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->keterangan }}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="telp">
-                                Nomor Telepon
-                                <small>(08xxxxxxxxxx)</small>
-                            </label>
-                            <input type="text" class="form-control" id="telp" name="telp"
-                                value="{{ old('telp') }}">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Alamat</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->alamat }}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="telp">Password</label>
-                            <p class="text-muted">password default :
-                                <strong>pengaduan</strong>
-                            </p>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Patokan</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->patokan }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Lokasi</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="https://maps.google.com/maps?q={{ $pengaduan->latitude }},{{ $pengaduan->longitude }}"
+                                    class="btn btn-secondary btn-sm" target="_blank">Lihat Maps</a>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Gambar</strong>
+                            </div>
+                            <div class="col-md-6">
+                                @foreach ($pengaduan->gambar as $gambar)
+                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class="img-thumbnail mb-2"
+                                        alt="Gambar">
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">

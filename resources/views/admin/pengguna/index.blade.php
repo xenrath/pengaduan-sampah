@@ -66,11 +66,11 @@
                                         <td>{{ $pengguna->nama }}</td>
                                         <td>{{ $pengguna->telp }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-warning" data-toggle="modal"
+                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                 data-target="#modal-edit-{{ $pengguna->id }}">
                                                 <i class="fas fa-pen"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                                 data-target="#modal-hapus-{{ $pengguna->id }}">
                                                 <i class="fas fa-trash"></i>
                                             </button>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Gambar;
 use App\Models\Pengaduan;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class PengaduandiprosesController extends Controller
@@ -47,8 +48,15 @@ class PengaduandiprosesController extends Controller
         $pengaduan->update([
             'status' => 'selesai',
             'foto' => $namaGambar,
-
         ]);
+
+        $pengaduan = Pengaduan::findOrFail($id);
+
+        $message = "Pengaduan anda telah di selesaikan oleh petugas"  . PHP_EOL;
+
+        $telp = User::where('id', $pengaduan->user_id)->value('telp');
+
+        $this->kirim($telp, $message);
 
         return redirect()->back()->with('success', 'Pengaduan Selesai');
     }
@@ -58,5 +66,33 @@ class PengaduandiprosesController extends Controller
         $pengaduan = Pengaduan::where('id', $id)->first();
         $gambars = Gambar::where('pengaduan_id', $pengaduan->id)->get();
         return view('petugas.diproses.show', compact('pengaduan', 'gambars'));
+    }
+
+    public function kirim($telp, $message)
+    {
+        $data = [
+            'target' => $telp,
+            'message' => $message
+        ];
+
+        $curl = curl_init();
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                "Authorization: bW4ZATiVth1!kKzeqbvH",
+            )
+        );
+
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($curl, CURLOPT_URL, "https://api.fonnte.com/send");
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        $result = json_decode(curl_exec($curl));
+
+        return $result;
     }
 }

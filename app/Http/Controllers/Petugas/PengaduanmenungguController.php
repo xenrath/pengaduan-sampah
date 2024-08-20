@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Gambar;
 use App\Models\Pengaduan;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class PengaduanmenungguController extends Controller

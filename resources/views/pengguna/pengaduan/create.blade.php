@@ -47,6 +47,15 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('erorrs'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5>
+                        <i class="icon fas fa-ban"></i> Gagal !
+                    </h5>
+                    {{ session('erorrs') }}
+                </div>
+            @endif
             <form action="{{ url('pengguna/pengaduan') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="card">

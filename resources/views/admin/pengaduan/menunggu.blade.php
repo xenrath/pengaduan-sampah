@@ -41,11 +41,11 @@
                                         <td>{{ $pengaduan->user->nama }}</td>
                                         <td>{{ $pengaduan->keterangan }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                                 data-target="#modal-tolak-{{ $pengaduan->id }}">
                                                 <i class="fas fa-times"></i>
                                             </button>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#modal-konfirmasi-{{ $pengaduan->id }}">
                                                 <i class="fas fa-check"></i>
                                             </button>

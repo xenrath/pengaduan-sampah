@@ -58,10 +58,11 @@
                                     <i class="fas fa-eye"></i>
                                     Detail
                                 </a>
-                                <button type="button" class="btn btn-secondary btn-sm">
+                                <a href="https://maps.google.com/maps?q={{ $pengaduan->latitude }},{{ $pengaduan->longitude }}"
+                                    class="btn btn-secondary btn-sm">
                                     <i class="fas fa-map-marked-alt"></i>
                                     Maps
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

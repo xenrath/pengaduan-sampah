@@ -29,14 +29,15 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>
-                                10&nbsp;data
+                                {{ $pengaduan_menunggu }}
+                                data
                             </h3>
-                            <p>Data Barang</p>
+                            <p>Pengaduan Menunggu</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-boxes"></i>
+                            <i class="fas fa-clipboard"></i>
                         </div>
-                        <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ url('petugas/menunggu') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -44,29 +45,31 @@
                     <div class="small-box bg-primary">
                         <div class="inner">
                             <h3>
-                                10&nbsp;data
+                                {{ $pengaduan_proses }}
+                                data
                             </h3>
-                            <p>Data Pemasukan</p>
+                            <p>Pengaduan Proses</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-shipping-fast"></i>
+                            <i class="fas fa-clipboard-list"></i>
                         </div>
-                        <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ url('petugas/diproses') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <!-- small box -->
-                    <div class="small-box bg-danger">
+                    <div class="small-box bg-success">
                         <div class="inner">
                             <h3>
-                                10&nbsp;data
+                                {{ $pengaduan_selesai }}
+                                data
                             </h3>
-                            <p>Data Pengeluaran</p>
+                            <p>Pengaduan Selesai</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-clipboard-check"></i>
                         </div>
-                        <a href="{{ url('pengaduan/selesai') }}" class="small-box-footer">Lihat
+                        <a href="{{ url('petugas/selesai') }}" class="small-box-footer">Lihat
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>

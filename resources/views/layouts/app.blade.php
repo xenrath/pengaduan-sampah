@@ -66,7 +66,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('storage/uploads/asset/logo.png') }}" alt="Pengaduan Sampah" class="brand-image">
+                <img src="{{ asset('asset/logo.png') }}" alt="Pengaduan Sampah" class="brand-image">
                 <span class="brand-text font-wight-bold">Pengaduan Sampah</span>
             </a>
 

@@ -16,6 +16,7 @@ class User extends Authenticatable
         'nama',
         'nik',
         'telp',
+        'verifikasi',
         'password',
         'role',
     ];

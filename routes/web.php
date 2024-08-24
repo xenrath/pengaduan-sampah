@@ -21,6 +21,8 @@ Route::post('register', [\App\Http\Controllers\AuthController::class, 'register_
 Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::get('profile', [\App\Http\Controllers\AuthController::class, 'profile']);
 Route::post('profile', [\App\Http\Controllers\AuthController::class, 'profile_proses']);
+Route::post('otp', [\App\Http\Controllers\AuthController::class, 'kode_verifikasi']);
+Route::get('kode', [\App\Http\Controllers\AuthController::class, 'kode_otp2']);
 
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);

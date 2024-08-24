@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nik')->unique();
             $table->string('telp')->unique();
+            $table->string('verifikasi');
             $table->string('password');
             $table->enum('role', ['admin', 'petugas', 'pengguna']);
             $table->timestamps();

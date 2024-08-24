@@ -31,6 +31,7 @@
                                     <th class="text-center" style="width: 20px">No</th>
                                     <th>Nama Pengguna</th>
                                     <th>Keterangan</th>
+                                    <th>Tanggal Buat</th>
                                     <th class="text-center" style="width: 80px">Status</th>
                                     <th class="text-center" style="width: 40px">Opsi</th>
                                 </tr>
@@ -38,9 +39,13 @@
                             <tbody>
                                 @foreach ($pengaduans as $pengaduan)
                                     <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-center" style="width: 20px;">{{ $loop->iteration }}</td>
                                         <td>{{ $pengaduan->user->nama }}</td>
                                         <td>{{ $pengaduan->keterangan }}</td>
+                                        <td>
+                                            {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('H:i') }} WIB,
+                                            {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('d F Y') }}
+                                        </td>
                                         <td class="text-center">
                                             @if ($pengaduan->status == 'selesai')
                                                 <span class="badge badge-success">Selesai</span>
@@ -82,7 +87,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Nama Pengguna</strong>
                             </div>
@@ -90,7 +95,7 @@
                                 {{ $pengaduan->user->nama }}
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Keterangan</strong>
                             </div>
@@ -98,7 +103,7 @@
                                 {{ $pengaduan->keterangan }}
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Alamat</strong>
                             </div>
@@ -106,7 +111,7 @@
                                 {{ $pengaduan->alamat }}
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Patokan</strong>
                             </div>
@@ -114,7 +119,7 @@
                                 {{ $pengaduan->patokan }}
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Lokasi</strong>
                             </div>
@@ -123,15 +128,24 @@
                                     class="btn btn-secondary btn-sm" target="_blank">Lihat Maps</a>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Gambar</strong>
                             </div>
                             <div class="col-md-6">
                                 @foreach ($pengaduan->gambar as $gambar)
-                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class="img-thumbnail mb-2"
+                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class=" w-100 mb-2"
                                         alt="Gambar">
                                 @endforeach
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <strong>Tanggal Buat</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('H:i') }} WIB,
+                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('d F Y') }}
                             </div>
                         </div>
                     </div>

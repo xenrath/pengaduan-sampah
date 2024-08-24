@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->string('foto')->nullable();
+            $table->string('tanggal_buat')->nullable();
             $table->string('tanggal_proses')->nullable();
+            $table->string('tanggal_selesai')->nullable();
             $table->enum('status', ['menunggu', 'konfirmasi', 'proses', 'selesai', 'tolak']);
             $table->timestamps();
         });

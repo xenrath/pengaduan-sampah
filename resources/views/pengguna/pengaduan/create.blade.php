@@ -15,47 +15,12 @@
                 <div class="col-sm-6">
                     <h1 class="m-0">Buat Pengaduan</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url('pengguna/pengaduan') }}">Buat Pengaduan</a></li>
-                        <li class="breadcrumb-item active"></li>
-                    </ol>
-                </div>
             </div>
         </div>
     </div>
 
     <section class="content">
         <div class="container-fluid">
-            @if (session('error'))
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h5>
-                        <i class="icon fas fa-ban"></i> Gagal Menyimpan!
-                    </h5>
-                    @foreach (session('error') as $error)
-                        - {{ $error }} <br>
-                    @endforeach
-                </div>
-            @endif
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h5>
-                        <i class="icon fas fa-check"></i> Berhasil !
-                    </h5>
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if (session('erorrs'))
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h5>
-                        <i class="icon fas fa-ban"></i> Gagal !
-                    </h5>
-                    {{ session('erorrs') }}
-                </div>
-            @endif
             <form action="{{ url('pengguna/pengaduan') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="card">
@@ -64,37 +29,60 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label for="alamat">Alamat</label>
-                            <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukan alamat">{{ old('alamat') }}</textarea>
+                            <textarea type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat">{{ old('alamat') }}</textarea>
+                            @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label for="patokan">Patokan</label>
-                            <input type="text" class="form-control" id="patokan" name="patokan"
-                                placeholder="masukkan patokan" value="{{ old('patokan') }}">
+                            <input type="text" class="form-control @error('patokan') is-invalid @enderror" id="patokan"
+                                name="patokan" value="{{ old('patokan') }}">
+                            @error('patokan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        <div class="form-group">
-                            <label style="font-size:14px" for="map">Peta</label>
+                        <div class="form-group mb-2">
+                            <label for="map">Peta</label>
                             <div id="map"></div>
                             <input type="hidden" id="latitude" value="{{ old('latitude') }}" name="latitude" />
                             <input type="hidden" id="longitude" value="{{ old('longitude') }}" name="longitude" />
+                            @error('latitude')
+                                <div class="text-danger">
+                                    <small>{{ $message }}</small>
+                                </div>
+                            @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label for="keterangan">Keterangan</label>
-                            <textarea type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukan keterangan">{{ old('alamat') }}</textarea>
+                            <textarea type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
+                                name="keterangan">{{ old('keterangan') }}</textarea>
+                            @error('keterangan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="gambar">Foto Lokasi</label>
                             <input class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar[]"
                                 type="file" accept="image/*" multiple />
                             @error('gambar')
-                                <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button type="reset" class="btn btn-secondary" id="btnReset">Reset</button>
-                        <button type="submit" class="btn btn-primary" id="btnSimpan">Simpan</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </form>

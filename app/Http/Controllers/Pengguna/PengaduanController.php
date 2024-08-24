@@ -19,40 +19,38 @@ class PengaduanController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'alamat' => 'required',
-                'latitude' => 'required',
-            ],
-            [
-                'alamat.required' => 'Masukkan alamat',
-                'latitude.required' => 'Pilih titik lokasi',
-            ]
-        );
+        $validator = Validator::make($request->all(), [
+            'alamat' => 'required',
+            'patokan' => 'required',
+            'latitude' => 'required',
+            'keterangan' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,jpg,png',
+        ], [
+            'alamat.required' => 'Alamat harus diisi!',
+            'patokan.required' => 'Patokan harus diisi!',
+            'latitude.required' => 'Titik Lokasi harus ditambahkan!',
+            'keterangan.required' => 'Keterangan harus diisi!',
+            'gambar.required' => 'Gambar harus ditambahkan!',
+            'gambar.image' => 'Gambar harus berformat jpg/jpeg/png!',
+            'gambar.required' => 'Gambar harus berformat jpg/jpeg/png!',
+        ]);
 
         if ($validator->fails()) {
-            $error = $validator->errors()->all();
-            return back()->withInput()->with('error', $error);
+            alert()->error('Error', 'Gagal membuat Pengaduan!');
+            return back()->withInput()->withErrors($validator->errors());
         }
 
-        $pengaduan = Pengaduan::create(array_merge(
-            $request->all(),
-            [
-                'user_id' => auth()->user()->id,
-                'patokan' => $request->patokan,
-                'alamat' => $request->alamat,
-                'keterangan' => $request->keterangan,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-                'status' => 'menunggu',
-            ],
-        ));
+        $pengaduan = Pengaduan::create(array_merge($request->all(), [
+            'user_id' => auth()->user()->id,
+            'patokan' => $request->patokan,
+            'alamat' => $request->alamat,
+            'keterangan' => $request->keterangan,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'tanggal_buat' => Carbon::now(),
+            'status' => 'menunggu',
+        ]));
 
-        $gambar = $request->gambar;
-        if ($gambar == null) {
-            return back()->with('erorrs', 'Foto tidak boleh kosong');
-        }
         if ($request->has('gambar')) {
             $gambars = $request->file('gambar');
 
@@ -74,7 +72,9 @@ class PengaduanController extends Controller
 
         $this->kirim($telp, $message);
 
-        return redirect('pengguna/pengaduan')->with('success', 'Berhasil menambahkan');
+        alert()->success('Success', 'Berhasil membuat Pengaduan');
+
+        return redirect('pengguna/list-pengaduan');
     }
 
     public function kirim($telp, $message)

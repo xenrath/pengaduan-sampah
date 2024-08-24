@@ -15,11 +15,12 @@ class Pengaduan extends Model
         'keterangan',
         'alamat',
         'patokan',
-        'tanggal_proses',
-        'foto',
-        'status',
         'latitude',
         'longitude',
+        'tanggal_buat',
+        'tanggal_proses',
+        'tanggal_selesai',
+        'status',
     ];
 
     public function user()

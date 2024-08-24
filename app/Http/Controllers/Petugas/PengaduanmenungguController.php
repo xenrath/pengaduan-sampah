@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Gambar;
 use App\Models\Pengaduan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class PengaduanmenungguController extends Controller
@@ -36,9 +37,12 @@ class PengaduanmenungguController extends Controller
             return back()->withInput()->with('error', $error);
         }
 
+
+        $tanggal = Carbon::parse($request->tanggal_proses)->setTimeFromTimeString(Carbon::now()->toTimeString());
+
         $pengaduan = Pengaduan::findOrFail($id);
         $pengaduan->update([
-            'tanggal_proses' => $request->tanggal_proses,
+            'tanggal_proses' => $tanggal,
             'status' => 'proses',
         ]);
 

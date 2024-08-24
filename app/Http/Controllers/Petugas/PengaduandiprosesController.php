@@ -8,6 +8,7 @@ use App\Models\Gambar;
 use App\Models\Pengaduan;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class PengaduandiprosesController extends Controller
 {
@@ -47,6 +48,7 @@ class PengaduandiprosesController extends Controller
         $pengaduan = Pengaduan::findOrFail($id);
         $pengaduan->update([
             'status' => 'selesai',
+            'tanggal_selesai' => Carbon::now(),
             'foto' => $namaGambar,
         ]);
 

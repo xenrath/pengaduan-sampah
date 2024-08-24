@@ -24,15 +24,14 @@ class PengaduanController extends Controller
             'patokan' => 'required',
             'latitude' => 'required',
             'keterangan' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,jpg,png',
+            'gambar' => 'required|max:2048',
         ], [
             'alamat.required' => 'Alamat harus diisi!',
             'patokan.required' => 'Patokan harus diisi!',
             'latitude.required' => 'Titik Lokasi harus ditambahkan!',
             'keterangan.required' => 'Keterangan harus diisi!',
             'gambar.required' => 'Gambar harus ditambahkan!',
-            'gambar.image' => 'Gambar harus berformat jpg/jpeg/png!',
-            'gambar.required' => 'Gambar harus berformat jpg/jpeg/png!',
+            // 'gambar.image' => 'Gambar yang dimasukan salah!'
         ]);
 
         if ($validator->fails()) {

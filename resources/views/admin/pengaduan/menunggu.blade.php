@@ -16,8 +16,20 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
+
     <section class="content">
         <div class="container-fluid">
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5>
+                        <i class="icon fas fa-ban"></i> Error!
+                    </h5>
+                    @foreach (session('error') as $error)
+                        - {{ $error }} <br>
+                    @endforeach
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data Pengaduan</h3>
@@ -31,7 +43,7 @@
                                     <th class="text-center" style="width: 20px">No</th>
                                     <th>Nama Pengguna</th>
                                     <th>Keterangan</th>
-                                    <th class="text-center" style="width: 80px">Opsi</th>
+                                    <th class="text-center" style="width: 100px">Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,15 +83,21 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('admin/pengaduan') }}" method="POST">
+                    <form action="{{ url('admin/pengaduan-menunggu/tolak/' . $pengaduan->id) }}"" method="POST"
+                        enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="modal-body">
                             Yakin tolak pengaduan dari <strong>{{ $pengaduan->user->nama }}</strong>?
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            <a href="{{ url('admin/pengaduan-menunggu/tolak/' . $pengaduan->id) }}"
-                                class="btn btn-danger">Tolak</a>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="alasan">Keterangan</label>
+                                <textarea type="text" class="form-control" id="alasan" name="alasan" placeholder="Masukan keterangan">{{ old('alasan') }}</textarea>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Tolak</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -148,11 +166,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a href="{{ url('admin/pengaduan-menunggu/konfirmasi/' . $pengaduan->id) }}"
-                            class="btn btn-primary">Konfirmasi</a>
-                    </div>
+                    <form action="{{ url('admin/pengaduan-menunggu/konfirmasi/' . $pengaduan->id) }}" method="POST"
+                        enctype="multipart/form-data" autocomplete="off">
+                        @csrf
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <label for="petugas_id">Petugas</label>
+                                <select class="custom-select form-control" id="petugas_id" name="petugas_id">
+                                    <option value="">- Pilih Petugas -</option>
+                                    @foreach ($petugass as $petugas)
+                                        <option value="{{ $petugas->id }}"
+                                            {{ old('petugas_id') == $petugas->id ? 'selected' : '' }}>
+                                            {{ $petugas->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Selesaikan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

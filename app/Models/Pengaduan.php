@@ -11,8 +11,10 @@ class Pengaduan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'petugas_id',
         'user_id',
         'keterangan',
+        'alasan',
         'alamat',
         'patokan',
         'latitude',

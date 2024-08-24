@@ -62,6 +62,30 @@
                                     {{ $pengaduan->patokan }}
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <strong>Tanggal di konfirmasi</strong>
+                                </div>
+                                <div class="col-md-4">
+                                    {{ $pengaduan->tanggal_buat }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <strong>Tanggal di kerjakan</strong>
+                                </div>
+                                <div class="col-md-4">
+                                    {{ $pengaduan->tanggal_proses }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <strong>Tanggal selesai</strong>
+                                </div>
+                                <div class="col-md-4">
+                                    {{ $pengaduan->tanggal_selesai }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

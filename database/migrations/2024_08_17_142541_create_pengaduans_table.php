@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('pengaduans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('petugas_id')->nullable();
+            $table->foreign('petugas_id')->references('id')->on('users')->onDelete('set null');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->string('alamat')->nullable();
             $table->string('patokan')->nullable();
             $table->string('keterangan')->nullable();
+            $table->string('alasan')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->string('foto')->nullable();

@@ -119,6 +119,30 @@
                                 {{ $pengaduan->patokan }}
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Tanggal di konfirmasi</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->tanggal_buat }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Tanggal di kerjakan</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->tanggal_proses }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Tanggal selesai</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ $pengaduan->tanggal_selesai }}
+                            </div>
+                        </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Lokasi</strong>

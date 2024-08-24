@@ -6,34 +6,79 @@ use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PengaduanMenungguController extends Controller
 {
     public function index()
     {
+        $petugass = User::where('role', 'petugas')->get();
         $pengaduans = Pengaduan::where('status', 'menunggu')->get();
 
-        return view('admin.pengaduan.menunggu', compact('pengaduans'));
+        return view('admin.pengaduan.menunggu', compact('pengaduans', 'petugass'));
     }
 
-    public function tolak($id)
+    public function tolak($id, Request $request)
     {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'alasan' => 'required',
+            ],
+            [
+                'alasan.required' => 'Masukkan keterangan',
+            ]
+        );
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->all();
+            return back()->withInput()->with('error', $error);
+        }
+
         Pengaduan::where('id', $id)->update([
-            'status' => 'tolak'
+            'status' => 'tolak',
+            'alasan' => $request->alasan
         ]);
+
+        $pengaduan = Pengaduan::findOrFail($id);
+
+        $message = "Pengaduan anda di tolak"  . PHP_EOL;
+        $message .= "----------------------------------"  . PHP_EOL;
+        $message .= "Keterangan : " . $pengaduan->alasan . PHP_EOL;
+
+        $telp = User::where('id', $pengaduan->user_id)->value('telp');
+
+        $this->kirim($telp, $message);
 
         alert()->success('Success', 'Berhasil menolak Pengaduan');
         return back();
     }
 
-    public function konfirmasi($id)
+    public function konfirmasi(Request $request, $id)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'petugas_id' => 'required',
+            ],
+            [
+                'petugas_id.required' => 'Pilih petugas',
+            ]
+        );
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->all();
+            return back()->withInput()->with('error', $error);
+        }
+
         $pengaduan = Pengaduan::where('id', $id)->update([
+            'petugas_id' => $request->petugas_id,
             'status' => 'konfirmasi'
         ]);
 
         $pengaduan = Pengaduan::findOrFail($id);
-        
+
         $message = "Admin telah mengkonfirmasi pengaduan baru"  . PHP_EOL;
         $message .= "----------------------------------"  . PHP_EOL;
         $message .= "Keterangan : " . $pengaduan->keterangan . PHP_EOL;

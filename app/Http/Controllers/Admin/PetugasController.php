@@ -40,6 +40,7 @@ class PetugasController extends Controller
             'nik' => $request->nik,
             'telp' => $request->telp,
             'password' => bcrypt('petugas'),
+            'verifikasi' => '1',
             'role' => 'petugas',
         ]);
 

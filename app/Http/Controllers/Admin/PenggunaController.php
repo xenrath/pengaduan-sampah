@@ -40,6 +40,7 @@ class PenggunaController extends Controller
             'nik' => $request->nik,
             'telp' => $request->telp,
             'password' => bcrypt('pengguna'),
+            'verifikasi' => '1',
             'role' => 'pengguna',
         ]);
 

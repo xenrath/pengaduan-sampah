@@ -33,7 +33,8 @@
                         <div class="form-group mb-2">
                             <label for="nama">Nama Lengkap</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                name="nama" value="{{ old('nama') }}">
+                                name="nama" value="{{ old('nama') }}" pattern="^[a-zA-Z\s]+$"
+                                title="Nama hanya boleh berisi huruf dan spasi">
                             @error('nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -43,7 +44,7 @@
                         <div class="form-group mb-2">
                             <label for="nik">NIK</label>
                             <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik"
-                                value="{{ old('nik') }}">
+                                value="{{ old('nik') }}" maxlength="16">
                             @error('nik')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -56,7 +57,7 @@
                                 <small class="text-muted">(08xxxxxxxxxx)</small>
                             </label>
                             <input type="tel" class="form-control @error('telp') is-invalid @enderror"
-                                name="telp" value="{{ old('telp') }}">
+                                name="telp" value="{{ old('telp') }}" maxlength="14">
                             @error('telp')
                                 <div class="invalid-feedback">
                                     {{ $message }}

@@ -19,13 +19,14 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'nik' => 'required|unique:users,nik',
+            'nik' => 'required|min:16|unique:users,nik',
             'telp' => 'required|unique:users,telp',
             'password' => 'required|confirmed'
         ], [
             'nama.required' => 'Nama Lengkap harus diisi!',
             'nik.required' => 'NIK harus diisi!',
             'nik.unique' => 'NIK sudah digunakan!',
+            'nik.min' => 'Masukan NIK dengan benar!',
             'telp.required' => 'Nomor Telepon harus diisi!',
             'telp.unique' => 'Nomor Telepon sudah digunakan!',
             'password.required' => 'Password harus diisi!',

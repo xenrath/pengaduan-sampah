@@ -99,8 +99,7 @@
                                                                 <label for="tanggal_proses">Pilih Tanggal Proses</label>
                                                                 <input class="form-control" id="tanggal_proses"
                                                                     name="tanggal_proses" type="date"
-                                                                    value="{{ Request::get('tanggal_proses') }}"
-                                                                    max="{{ date('Y-m-d') }}" />
+                                                                    value="{{ Request::get('tanggal_proses') }}" />
                                                             </div>
                                                         </div>
                                                         <div class="card-footer text-right">

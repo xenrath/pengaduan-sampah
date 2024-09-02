@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,16 +21,11 @@ class PengaduanMenungguController extends Controller
 
     public function tolak($id, Request $request)
     {
-
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'alasan' => 'required',
-            ],
-            [
-                'alasan.required' => 'Masukkan keterangan',
-            ]
-        );
+        $validator = Validator::make($request->all(), [
+            'alasan' => 'required',
+        ], [
+            'alasan.required' => 'Masukkan keterangan',
+        ]);
 
         if ($validator->fails()) {
             $error = $validator->errors()->all();
@@ -57,15 +53,11 @@ class PengaduanMenungguController extends Controller
 
     public function konfirmasi(Request $request, $id)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'petugas_id' => 'required',
-            ],
-            [
-                'petugas_id.required' => 'Pilih petugas',
-            ]
-        );
+        $validator = Validator::make($request->all(), [
+            'petugas_id' => 'required',
+        ], [
+            'petugas_id.required' => 'Pilih petugas',
+        ]);
 
         if ($validator->fails()) {
             $error = $validator->errors()->all();

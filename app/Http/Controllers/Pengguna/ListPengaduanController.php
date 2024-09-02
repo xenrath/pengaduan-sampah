@@ -11,7 +11,7 @@ class ListPengaduanController extends Controller
 {
     public function index()
     {
-        $pengaduans = Pengaduan::all();
+        $pengaduans = Pengaduan::get();
         return view('pengguna.list_pengaduan.index', compact('pengaduans'));
     }
 

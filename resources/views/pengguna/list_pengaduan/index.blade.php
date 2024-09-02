@@ -121,28 +121,34 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <strong>Tanggal di konfirmasi</strong>
+                                <strong>Tanggal Buat</strong>
                             </div>
                             <div class="col-md-6">
-                                {{ $pengaduan->tanggal_buat }}
+                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('H:i') }} WIB,
+                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('d F Y') }}
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Tanggal di kerjakan</strong>
+                        @if ($pengaduan->tanggal_proses)
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong>Tanggal Proses</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_proses)->format('d F Y') }}
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                {{ $pengaduan->tanggal_proses }}
+                        @endif
+                        @if ($pengaduan->tanggal_selesai)
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong>Tanggal Selesai</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_selesai)->format('H:i') }} WIB,
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_selesai)->format('d F Y') }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Tanggal selesai</strong>
-                            </div>
-                            <div class="col-md-6">
-                                {{ $pengaduan->tanggal_selesai }}
-                            </div>
-                        </div>
+                        @endif
                         <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Lokasi</strong>
@@ -165,11 +171,10 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <strong>Tanggal Buat</strong>
+                                <strong>Petugas</strong>
                             </div>
                             <div class="col-md-6">
-                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('H:i') }} WIB,
-                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('d F Y') }}
+                                {{ $pengaduan->petugas->nama }}
                             </div>
                         </div>
                     </div>

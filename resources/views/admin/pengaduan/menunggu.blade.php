@@ -112,79 +112,115 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Nama Pengguna</strong>
-                            </div>
-                            <div class="col-md-6">
-                                {{ $pengaduan->user->nama }}
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Keterangan</strong>
-                            </div>
-                            <div class="col-md-6">
-                                {{ $pengaduan->keterangan }}
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Alamat</strong>
-                            </div>
-                            <div class="col-md-6">
-                                {{ $pengaduan->alamat }}
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Patokan</strong>
-                            </div>
-                            <div class="col-md-6">
-                                {{ $pengaduan->patokan }}
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Lokasi</strong>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="https://maps.google.com/maps?q={{ $pengaduan->latitude }},{{ $pengaduan->longitude }}"
-                                    class="btn btn-secondary btn-sm" target="_blank">Lihat Maps</a>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <strong>Gambar</strong>
-                            </div>
-                            <div class="col-md-6">
-                                @foreach ($pengaduan->gambar as $gambar)
-                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class="img-thumbnail mb-2"
-                                        alt="Gambar">
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
                     <form action="{{ url('admin/pengaduan-menunggu/konfirmasi/' . $pengaduan->id) }}" method="POST"
                         enctype="multipart/form-data" autocomplete="off">
                         @csrf
-                        <div class="card-body">
-                            <div class="row mb-3">
-                                <label for="petugas_id">Petugas</label>
-                                <select class="custom-select form-control" id="petugas_id" name="petugas_id">
-                                    <option value="">- Pilih Petugas -</option>
-                                    @foreach ($petugass as $petugas)
-                                        <option value="{{ $petugas->id }}"
-                                            {{ old('petugas_id') == $petugas->id ? 'selected' : '' }}>
-                                            {{ $petugas->nama }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="modal-body">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Nama Pengguna</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $pengaduan->user->nama }}
+                                </div>
                             </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Keterangan</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $pengaduan->keterangan }}
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Alamat</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $pengaduan->alamat }}
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Patokan</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $pengaduan->patokan }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong>Tanggal Buat</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('H:i') }} WIB,
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('d F Y') }}
+                                </div>
+                            </div>
+                            @if ($pengaduan->tanggal_proses)
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <strong>Tanggal Proses</strong>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ Carbon\Carbon::parse($pengaduan->tanggal_proses)->format('d F Y') }}
+                                    </div>
+                                </div>
+                            @endif
+                            @if ($pengaduan->tanggal_selesai)
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <strong>Tanggal Selesai</strong>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ Carbon\Carbon::parse($pengaduan->tanggal_selesai)->format('H:i') }} WIB,
+                                        {{ Carbon\Carbon::parse($pengaduan->tanggal_selesai)->format('d F Y') }}
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Lokasi</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="https://maps.google.com/maps?q={{ $pengaduan->latitude }},{{ $pengaduan->longitude }}"
+                                        class="btn btn-secondary btn-sm" target="_blank">Lihat Maps</a>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Gambar</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @foreach ($pengaduan->gambar as $gambar)
+                                        <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class=" w-100 mb-2"
+                                            alt="Gambar">
+                                    @endforeach
+                                </div>
+                            </div>
+                            @if ($pengaduan->petugas_id)
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <strong>Petugas</strong>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ $pengaduan->petugas->nama }}
+                                    </div>
+                                </div>
+                            @endif
+                            <label for="petugas_id">Petugas</label>
+                            <select class="custom-select form-control" id="petugas_id" name="petugas_id">
+                                <option value="">- Pilih Petugas -</option>
+                                @foreach ($petugass as $petugas)
+                                    <option value="{{ $petugas->id }}"
+                                        {{ old('petugas_id') == $petugas->id ? 'selected' : '' }}>
+                                        {{ $petugas->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="card-footer text-right">
+                        <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary" id="submitBtn">Selesaikan</button>
+                            <button type="submit" class="btn btn-primary">Terima</button>
                         </div>
                     </form>
                 </div>

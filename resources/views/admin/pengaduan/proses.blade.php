@@ -31,6 +31,7 @@
                                     <th class="text-center" style="width: 20px">No</th>
                                     <th>Nama Pengguna</th>
                                     <th>Keterangan</th>
+                                    <th>Petugas</th>
                                     <th>Status</th>
                                     <th class="text-center" style="width: 20px">Opsi</th>
                                 </tr>
@@ -41,6 +42,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $pengaduan->user->nama }}</td>
                                         <td>{{ $pengaduan->keterangan }}</td>
+                                        <td>{{ $pengaduan->petugas->nama }}</td>
                                         <td>
                                             @if ($pengaduan->status == 'konfirmasi')
                                                 <span class="badge badge-primary">Konfirmasi</span>
@@ -76,7 +78,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Nama Pengguna</strong>
                             </div>
@@ -84,7 +86,7 @@
                                 {{ $pengaduan->user->nama }}
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Keterangan</strong>
                             </div>
@@ -92,7 +94,7 @@
                                 {{ $pengaduan->keterangan }}
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Alamat</strong>
                             </div>
@@ -100,7 +102,7 @@
                                 {{ $pengaduan->alamat }}
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Patokan</strong>
                             </div>
@@ -110,6 +112,36 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
+                                <strong>Tanggal Buat</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('H:i') }} WIB,
+                                {{ Carbon\Carbon::parse($pengaduan->tanggal_buat)->format('d F Y') }}
+                            </div>
+                        </div>
+                        @if ($pengaduan->tanggal_proses)
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong>Tanggal Proses</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_proses)->format('d F Y') }}
+                                </div>
+                            </div>
+                        @endif
+                        @if ($pengaduan->tanggal_selesai)
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong>Tanggal Selesai</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_selesai)->format('H:i') }} WIB,
+                                    {{ Carbon\Carbon::parse($pengaduan->tanggal_selesai)->format('d F Y') }}
+                                </div>
+                            </div>
+                        @endif
+                        <div class="row mb-2">
+                            <div class="col-md-6">
                                 <strong>Lokasi</strong>
                             </div>
                             <div class="col-md-6">
@@ -117,17 +149,27 @@
                                     class="btn btn-secondary btn-sm" target="_blank">Lihat Maps</a>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <strong>Gambar</strong>
                             </div>
                             <div class="col-md-6">
                                 @foreach ($pengaduan->gambar as $gambar)
-                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class="img-thumbnail mb-2"
+                                    <img src="{{ asset('storage/uploads/' . $gambar->gambar) }}" class=" w-100 mb-2"
                                         alt="Gambar">
                                 @endforeach
                             </div>
                         </div>
+                        @if ($pengaduan->petugas_id)
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Petugas</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $pengaduan->petugas->nama }}
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

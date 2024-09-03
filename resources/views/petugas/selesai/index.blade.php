@@ -72,9 +72,6 @@
                                         <a href="{{ url('petugas/selesai/' . $pengaduan->id) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <button type="submit" class="btn btn-success btn-sm">
-                                            <i class="fas fa-check-square"></i>
-                                        </button>
                                     </td>
                                 </tr>
                             @endforeach

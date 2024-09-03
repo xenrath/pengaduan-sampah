@@ -169,14 +169,16 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="row mb-2">
-                            <div class="col-md-6">
-                                <strong>Petugas</strong>
+                        @if ($pengaduan->petugas_id)
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Petugas</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $pengaduan->petugas->nama }}
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                {{ $pengaduan->petugas->nama }}
-                            </div>
-                        </div>
+                        @endif
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

@@ -24,15 +24,35 @@ class PengaduanController extends Controller
             'patokan' => 'required',
             'latitude' => 'required',
             'keterangan' => 'required',
-            'gambar' => 'required|max:2048',
+            'gambar' => 'required|array',
+            'gambar.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ], [
             'alamat.required' => 'Alamat harus diisi!',
             'patokan.required' => 'Patokan harus diisi!',
             'latitude.required' => 'Titik Lokasi harus ditambahkan!',
             'keterangan.required' => 'Keterangan harus diisi!',
             'gambar.required' => 'Gambar harus ditambahkan!',
-            // 'gambar.image' => 'Gambar yang dimasukan salah!'
+            'gambar.*.image' => 'Salah satu file bukan gambar!',
+            'gambar.*.mimes' => 'Salah satu file bukan gambar!',
+            'gambar.*.max' => 'Salah satu file terlalu besar!',
         ]);
+
+        // if ($request->gambar) {
+
+        //     $validator = Validator::make($request->all(), [
+        //         'gambar' => 'required',
+        //     ], [
+        //         'alamat.required' => 'Alamat harus diisi!',
+        //         'patokan.required' => 'Patokan harus diisi!',
+        //         'latitude.required' => 'Titik Lokasi harus ditambahkan!',
+        //         'keterangan.required' => 'Keterangan harus diisi!',
+        //         'gambar.required' => 'Gambar harus ditambahkan!',
+        //         'gambar.mimes' => 'Salah satu file bukan gambar!',
+        //         'gambar.max' => 'Salah satu file terlalu besar!',
+        //         'gambar.*.mimes' => 'Salah satu file bukan gambar!',
+        //         'gambar.*.max' => 'Salah satu file terlalu besar!',
+        //     ]);
+        // }
 
         if ($validator->fails()) {
             alert()->error('Error', 'Gagal membuat Pengaduan!');

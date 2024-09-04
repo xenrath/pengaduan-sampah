@@ -78,6 +78,13 @@
                                     {{ $message }}
                                 </div>
                             @enderror
+                            @if ($errors->has('gambar.*'))
+                                @foreach ($errors->get('gambar.*') as $messages)
+                                    @foreach ($messages as $message)
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="card-footer text-right">

@@ -101,11 +101,13 @@
                         <div class="form-group">
                             <label for="nama">Nama Pengguna</label>
                             <input type="text" class="form-control" id="nama" name="nama"
+                                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))"
                                 value="{{ old('nama') }}">
                         </div>
                         <div class="form-group">
                             <label for="nik">NIK</label>
                             <input type="text" class="form-control" id="nik" name="nik"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                 value="{{ old('nik') }}">
                         </div>
                         <div class="form-group">
@@ -114,6 +116,7 @@
                                 <small>(08xxxxxxxxxx)</small>
                             </label>
                             <input type="text" class="form-control" id="telp" name="telp"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                 value="{{ old('telp') }}">
                         </div>
                         <div class="form-group">
@@ -148,11 +151,13 @@
                             <div class="form-group">
                                 <label for="nama">Nama Pengguna</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
+                                    onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))"
                                     value="{{ $pengguna->nama }}">
                             </div>
                             <div class="form-group">
                                 <label for="nik">NIK</label>
                                 <input type="text" class="form-control" id="nik" name="nik"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                     value="{{ $pengguna->nik }}">
                             </div>
                             <div class="form-group">
@@ -161,6 +166,7 @@
                                     <small>(08xxxxxxxxxx)</small>
                                 </label>
                                 <input type="text" class="form-control" id="telp" name="telp"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                     value="{{ $pengguna->telp }}">
                             </div>
                             <div class="form-group">

@@ -107,8 +107,8 @@
                         <div class="form-group">
                             <label for="nik">NIK</label>
                             <input type="text" class="form-control" id="nik" name="nik"
-                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                value="{{ old('nik') }}">
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{ old('nik') }}"
+                                minlength="16" maxlength="16">
                         </div>
                         <div class="form-group">
                             <label for="telp">
@@ -117,7 +117,7 @@
                             </label>
                             <input type="text" class="form-control" id="telp" name="telp"
                                 onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                value="{{ old('telp') }}">
+                                value="{{ old('telp') }}" minlength="10" minlength="13">
                         </div>
                         <div class="form-group">
                             <label for="telp">Password</label>
@@ -158,7 +158,7 @@
                                 <label for="nik">NIK</label>
                                 <input type="text" class="form-control" id="nik" name="nik"
                                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                    value="{{ $petugas->nik }}">
+                                    value="{{ $petugas->nik }}" minlength="16" maxlength="16">
                             </div>
                             <div class="form-group">
                                 <label for="telp">
@@ -167,7 +167,7 @@
                                 </label>
                                 <input type="text" class="form-control" id="telp" name="telp"
                                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                    value="{{ $petugas->telp }}">
+                                    value="{{ $petugas->telp }}" minlength="10" minlength="13">
                             </div>
                             <div class="form-group">
                                 <label for="telp">Password</label>

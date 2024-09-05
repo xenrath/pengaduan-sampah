@@ -33,7 +33,8 @@
                         <div class="form-group mb-2">
                             <label for="nama">Nama Lengkap</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                name="nama" value="{{ old('nama') }}" pattern="^[a-zA-Z\s]+$"
+                                name="nama" value="{{ old('nama') }}"
+                                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))"
                                 title="Nama hanya boleh berisi huruf dan spasi">
                             @error('nama')
                                 <div class="invalid-feedback">
@@ -44,7 +45,9 @@
                         <div class="form-group mb-2">
                             <label for="nik">NIK</label>
                             <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik"
-                                value="{{ old('nik') }}" maxlength="16">
+                                value="{{ old('nik') }}"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" minlength="16"
+                                maxlength="16">
                             @error('nik')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -57,7 +60,8 @@
                                 <small class="text-muted">(08xxxxxxxxxx)</small>
                             </label>
                             <input type="tel" class="form-control @error('telp') is-invalid @enderror"
-                                name="telp" value="{{ old('telp') }}" maxlength="14">
+                                name="telp" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                value="{{ old('telp') }}" minlength="12" minlength="13">
                             @error('telp')
                                 <div class="invalid-feedback">
                                     {{ $message }}

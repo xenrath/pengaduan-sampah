@@ -33,7 +33,9 @@
                         <div class="form-group mb-2">
                             <div class="input-group">
                                 <input type="tel" class="form-control @error('telp') is-invalid @enderror"
-                                    name="telp" placeholder="Nomor Telepon" value="{{ old('telp') }}">
+                                    name="telp" placeholder="Nomor Telepon" value="{{ old('telp') }}"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" minlength="12"
+                                    minlength="13">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-phone"></span>

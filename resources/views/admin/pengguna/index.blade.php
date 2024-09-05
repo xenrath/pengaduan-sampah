@@ -117,7 +117,7 @@
                             </label>
                             <input type="text" class="form-control" id="telp" name="telp"
                                 onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                value="{{ old('telp') }}" minlength="10" minlength="13">
+                                value="{{ old('telp') }}" minlength="12" minlength="13">
                         </div>
                         <div class="form-group">
                             <label for="telp">Password</label>
@@ -167,7 +167,7 @@
                                 </label>
                                 <input type="text" class="form-control" id="telp" name="telp"
                                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                    value="{{ $pengguna->telp }}" minlength="10" minlength="13">
+                                    value="{{ $pengguna->telp }}" minlength="12" minlength="13">
                             </div>
                             <div class="form-group">
                                 <label for="telp">Password</label>

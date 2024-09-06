@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    
+
     <section class="content">
         <div class="container-fluid">
             <div class="card">
@@ -26,7 +26,8 @@
                         <div class="form-group mb-2">
                             <label for="nama">Nama Lengkap</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
-                                name="nama" value="{{ old('nama', $user->nama) }}">
+                                name="nama" value="{{ old('nama', $user->nama) }}"
+                                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))">
                             @error('nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -36,7 +37,9 @@
                         <div class="form-group mb-2">
                             <label for="nik">NIK</label>
                             <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik"
-                                name="nik" value="{{ old('nik', $user->nik) }}">
+                                name="nik" value="{{ old('nik', $user->nik) }}"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" minlength="16"
+                                maxlength="16">
                             @error('nik')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -47,7 +50,9 @@
                             <label for="telp">No. Telepon</label>
                             <input type="tel" id="telp" name="telp"
                                 class="form-control @error('telp') is-invalid @enderror"
-                                value="{{ old('telp', $user->telp) }}">
+                                value="{{ old('telp', $user->telp) }}"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" minlength="12"
+                                minlength="13">
                             @error('telp')
                                 <div class="invalid-feedback">
                                     {{ $message }}

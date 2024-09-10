@@ -52,7 +52,8 @@
                         </div>
                         <div class="form-group mb-2">
                             <input type="text" class="form-control" name="kode" placeholder="Kode OTP"
-                                value="{{ old('kode') }}">
+                                value="{{ old('kode') }}"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" minlength="16">
                             @error('kode')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -60,7 +61,8 @@
                             @enderror
                         </div>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary btn-block my-4">Submit</button>
+                            <button type="button" class="btn btn-primary btn-block my-4"
+                                onclick="proses_kode()">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -73,6 +75,11 @@
     <script>
         function kirim_kode() {
             $('#form-submit').attr('action', "{{ url('reset-password/kode') }}");
+            $('#form-submit').submit();
+        }
+
+        function proses_kode() {
+            $('#form-submit').attr('action', "{{ url('reset-password/proses') }}");
             $('#form-submit').submit();
         }
     </script>

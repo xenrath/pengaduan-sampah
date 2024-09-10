@@ -58,7 +58,7 @@ class AuthController extends Controller
 
     public function otp($telp)
     {
-        $user = Otp::where('telp')->first();
+        $user = Otp::where('telp', $telp)->first();
 
         $curl = curl_init();
         $otp = rand(100000, 999999);
@@ -232,7 +232,7 @@ class AuthController extends Controller
         return back()->withInput();
     }
 
-    public function reset_password_cek(Request $request)
+    public function reset_password_proses(Request $request)
     {
         $otp = Otp::where('telp', $request->telp)->first();
 
@@ -242,16 +242,35 @@ class AuthController extends Controller
         }
 
         alert()->success('Success', 'Kode OTP benar!');
-        return $this->new_password($request->telp);
+        return redirect('new-password')->with('telp', $request->telp);
     }
 
-    public function new_password($telp)
+    public function new_password()
     {
-        return view('new-password', compact('telp'));
+        return view('new-password');
     }
-    
+
     public function new_password_proses(Request $request)
     {
-        return view('new-password', compact('telp'));
+        $validator = Validator::make($request->all(), [
+            'telp' => 'required',
+            'password' => 'required|confirmed',
+        ], [
+            'telp.required' => 'Nomor Telepon harus diisi!',
+            'password.required' => 'Password harus diisi!',
+            'password.confirmed' => 'Konfirmasi Password tidak sesuai!',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Error', 'Isi data dengan benar!');
+            return back()->withInput()->withErrors($validator->errors());
+        }
+
+        User::where('telp', $request->telp)->update([
+            'password' => bcrypt($request->password),
+        ]);
+
+        alert()->success('Success', 'Berhasil memperbarui Password');
+        return redirect('login');
     }
 }

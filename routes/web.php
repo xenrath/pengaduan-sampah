@@ -18,6 +18,8 @@ Route::get('login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('login', [\App\Http\Controllers\AuthController::class, 'login_proses']);
 Route::get('register', [\App\Http\Controllers\AuthController::class, 'register']);
 Route::post('register', [\App\Http\Controllers\AuthController::class, 'register_proses']);
+Route::post('reset-password/kode', [\App\Http\Controllers\AuthController::class, 'reset_password_kode']);
+Route::get('reset-password', [\App\Http\Controllers\AuthController::class, 'reset_password']);
 Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::get('profile', [\App\Http\Controllers\AuthController::class, 'profile']);
 Route::post('profile', [\App\Http\Controllers\AuthController::class, 'profile_proses']);

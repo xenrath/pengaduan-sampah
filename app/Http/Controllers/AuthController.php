@@ -211,4 +211,47 @@ class AuthController extends Controller
         alert()->success('Success', 'Berhasil memperbarui Profile');
         return back();
     }
+
+    public function reset_password()
+    {
+        return view('reset-password');
+    }
+
+    public function reset_password_kode(Request $request)
+    {
+        $user = User::where('telp', $request->telp)->first();
+
+        if (!$user) {
+            alert()->error('Error', 'Gagal mengirim Kode OTP!');
+            return back()->withInput()->withErrors(['telp' => 'Nomor Telepon tidak ditemukan!']);
+        }
+
+        $this->otp($request->telp);
+
+        alert()->success('Success', 'Berhasil mengirim Kode OTP');
+        return back()->withInput();
+    }
+
+    public function reset_password_cek(Request $request)
+    {
+        $otp = Otp::where('telp', $request->telp)->first();
+
+        if ($otp->kode != $request->kode) {
+            alert()->error('Error', 'Kode OTP salah!');
+            return back()->withInput()->withErrors(['kode' => 'Kode OTP salah!']);
+        }
+
+        alert()->success('Success', 'Kode OTP benar!');
+        return $this->new_password($request->telp);
+    }
+
+    public function new_password($telp)
+    {
+        return view('new-password', compact('telp'));
+    }
+    
+    public function new_password_proses(Request $request)
+    {
+        return view('new-password', compact('telp'));
+    }
 }

@@ -37,7 +37,7 @@
                         <div class="icon">
                             <i class="fas fa-clipboard"></i>
                         </div>
-                        <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ url('admin/pengaduan-menunggu') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -53,7 +53,7 @@
                         <div class="icon">
                             <i class="fas fa-clipboard-list"></i>
                         </div>
-                        <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ url('admin/pengaduan-proses') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -64,12 +64,12 @@
                                 {{ $pengaduan_selesai }}
                                 data
                             </h3>
-                            <p>Data Pengguna</p>
+                            <p>Pengaduan Selesai</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-clipboard-check"></i>
                         </div>
-                        <a href="{{ url('pengaduan/selesai') }}" class="small-box-footer">Lihat
+                        <a href="{{ url('admin/pengaduan-riwayat') }}" class="small-box-footer">Lihat
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -89,7 +89,7 @@
                         <div class="icon">
                             <i class="fas fa-user"></i>
                         </div>
-                        <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ 'admin/petugas' }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -105,7 +105,7 @@
                         <div class="icon">
                             <i class="fas fa-user"></i>
                         </div>
-                        <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ 'admin/pengguna' }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

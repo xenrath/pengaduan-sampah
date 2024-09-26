@@ -44,7 +44,7 @@
                                         <td>{{ $pengaduan->keterangan }}</td>
                                         <td class="text-center">
                                             @if ($pengaduan->status == 'selesai')
-                                                {{ $pengaduan->petugas->nama }}
+                                                {{ $pengaduan->petugas->nama ?? '-' }}
                                             @else
                                                 -
                                             @endif

@@ -28,6 +28,8 @@ Route::get('profile', [\App\Http\Controllers\AuthController::class, 'profile']);
 Route::post('profile', [\App\Http\Controllers\AuthController::class, 'profile_proses']);
 Route::post('otp', [\App\Http\Controllers\AuthController::class, 'kode_verifikasi']);
 Route::get('kode', [\App\Http\Controllers\AuthController::class, 'kode_otp2']);
+Route::get('faq', [\App\Http\Controllers\HomeController::class, 'faq']);
+Route::get('about', [\App\Http\Controllers\HomeController::class, 'about']);
 
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);

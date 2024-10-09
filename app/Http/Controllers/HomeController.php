@@ -20,4 +20,14 @@ class HomeController extends Controller
 
         return redirect('login');
     }
+
+    public function faq()
+    {
+        return view('faq');
+    }
+    
+    public function about()
+    {
+        return view('about');
+    }
 }

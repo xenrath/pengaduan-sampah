@@ -61,24 +61,20 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fas fa-info-circle"></i> <span class="badge badge-danger navbar-badge"></span>
+                    <a class="nav-link" href="{{ url('faq') }}">
+                        <i class="fas fa-question-circle"></i>
+                        <strong>FAQ</strong>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div>
-                                <h3 style="font-size:13px">Jika ada memerlukan bantuan lebih lanjut:</h3>
-                                <h3 style="font-size:13px">- Kirim email ke: support@pengaduansampah.com</h3>
-                                <h3 style="font-size:13px">- Hubungi hotline: 0800-123-4567</h3>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                    </div>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{{ url('about') }}">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>About</strong>
+                    </a>
                 </li>
                 <!-- Notifications Dropdown Menu -->
             </ul>

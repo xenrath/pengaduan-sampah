@@ -14,8 +14,7 @@ class UserSeeder extends Seeder
             [
                 'nama' => 'Admin',
                 'nik' => '3376026102990002',
-                // 'telp' => '0895393395466',
-                'telp' => 'admin',
+                'telp' => '0895393395466',
                 'verifikasi' => '1',
                 'password' => bcrypt('admin'),
                 'role' => 'admin',
@@ -23,8 +22,7 @@ class UserSeeder extends Seeder
             [
                 'nama' => 'Petugas',
                 'nik' => 'petugas',
-                // 'telp' => '085328481969',
-                'telp' => 'petugas',
+                'telp' => '085328481969',
                 'verifikasi' => '1',
                 'password' => bcrypt('petugas'),
                 'role' => 'petugas',

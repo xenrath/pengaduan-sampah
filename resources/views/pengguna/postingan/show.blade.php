@@ -74,6 +74,10 @@
                                 <br>
                                 {{ $pengaduan->alamat }} ({{ $pengaduan->patokan }})
                             </p>
+                            <p>
+                                <strong>Petugas:</strong>
+                                {{ $pengaduan->petugas->nama }}
+                            </p>
                             <a href="https://maps.google.com/maps?q={{ $pengaduan->latitude }},{{ $pengaduan->longitude }}"
                                 class="btn btn-secondary btn-sm">
                                 <i class="fas fa-map-marked-alt"></i>

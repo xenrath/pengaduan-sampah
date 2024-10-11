@@ -57,6 +57,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">No</th>
+                                <th>Pengadu</th>
                                 <th>Alamat</th>
                                 <th>Keterangan</th>
                                 <th class="text-center" width="80">Opsi</th>
@@ -66,6 +67,7 @@
                             @foreach ($pengaduans as $pengaduan)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $pengaduan->user->nama }}</td>
                                     <td>{{ $pengaduan->alamat }}</td>
                                     <td>{{ $pengaduan->keterangan }}</td>
                                     <td class="text-center">
